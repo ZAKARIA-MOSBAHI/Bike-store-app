@@ -23,24 +23,7 @@ export const styles = ScaledSheet.create({
     marginBottom: '4@vs',
   },
   productPrice: {color: colors.secondary, fontWeight: 'bold'},
-  quantityCounter: {
-    backgroundColor: colors.dark,
-    borderRadius: 8,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  counterBtn: {
-    width: '28@s',
-    height: '28@vs',
-    alignItems: 'center',
-    justifyContent: 'center',
-    mixBlendMode: 'screen',
-  },
-  productQuantity: {
-    marginInline: '8@s',
-    color: colors.gray,
-    fontWeight: 'bold',
-  },
+
   cartDivider: {
     width: '100%',
     height: '0.5@vs',

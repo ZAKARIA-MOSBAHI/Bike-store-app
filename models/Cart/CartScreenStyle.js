@@ -8,6 +8,8 @@ export const styles = ScaledSheet.create({
     position: 'relative',
   },
   footerContainer: {
+    padding: 20,
+
     position: 'absolute',
     backgroundColor: colors.background,
     bottom: 0,

@@ -4,6 +4,8 @@ import ProductScreen from './models/Product/ProductScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createStaticNavigation} from '@react-navigation/native';
 import CartScreen from './models/Cart/CartScreen';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import CheckoutScreen from './models/Checkout/CheckoutScreen';
 
 const RootStack = createNativeStackNavigator({
   initialRouteName: 'Home',
@@ -11,6 +13,7 @@ const RootStack = createNativeStackNavigator({
     Home: HomeScreen,
     Product: ProductScreen,
     Cart: CartScreen,
+    Checkout: CheckoutScreen,
   },
   screenOptions: {
     headerShown: false,
@@ -18,5 +21,9 @@ const RootStack = createNativeStackNavigator({
 });
 const Navigation = createStaticNavigation(RootStack);
 export default function App() {
-  return <Navigation />;
+  return (
+    <GestureHandlerRootView>
+      <Navigation />
+    </GestureHandlerRootView>
+  );
 }

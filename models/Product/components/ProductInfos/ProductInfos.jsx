@@ -5,7 +5,6 @@ import {styles} from './ProductInfoStyle';
 import ButtonsRow from './components/ButtonsRow/ButtonsRow';
 import ProductDesc from './components/ProductDesc/ProductDesc';
 import ProductFooter from './components/ProductFooter/ProductFooter';
-
 export default function ProductInfos({
   isOpen,
   activeBtn,

@@ -7,7 +7,7 @@ import CartIcon from '../../assets/icons/CartIcon';
 import PersonIcon from '../../assets/icons/PersonIcon';
 import DocumentIcon from '../../assets/icons/DocumentIcon';
 import {colors} from '../../styles/colors';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
 const footerMenu = [
   {

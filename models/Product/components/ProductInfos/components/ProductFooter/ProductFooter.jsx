@@ -10,7 +10,6 @@ export default function ProductFooter({product}) {
 
   const h = () => {
     addToCart({...product, quantity: 1});
-    console.log(cart);
   };
   return (
     <View style={styles.footerContainer}>

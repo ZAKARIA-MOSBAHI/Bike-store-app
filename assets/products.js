@@ -30,7 +30,7 @@ export const products = [
     id: 3,
     name: 'PILOT - Chromoly',
     category: 'Mountain Bike',
-    price: '1.999.99',
+    price: 1999.99,
     img: bicycle3,
     largeImage: bicycle3Lg,
     description:

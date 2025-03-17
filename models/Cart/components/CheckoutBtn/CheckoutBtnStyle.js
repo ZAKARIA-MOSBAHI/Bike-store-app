@@ -3,29 +3,22 @@ import {ScaledSheet} from 'react-native-size-matters/extend';
 export const styles = ScaledSheet.create({
   container: {
     overflow: 'hidden',
-    borderColor: 'red',
     borderRadius: 10,
     height: '50@vs',
-    width: '95%',
+    width: '200@s',
   },
   couponInputContainer: {
     height: '100%',
     flexDirection: 'row',
-    gap: '4@s',
-    justifyContent: 'center',
+    gap: '24@s',
     alignItems: 'center',
   },
-  input: {
-    width: '60%',
-    height: '100%',
-    paddingLeft: '12@s',
-  },
-  applyBtn: {
+
+  btn: {
+    transform: [{rotate: '180deg'}],
+    width: 44,
+    height: 44,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 10,
-    paddingInline: '40@s',
-    height: '100%',
   },
-  textBtn: {color: '#fff', fontWeight: 'bold'},
 });

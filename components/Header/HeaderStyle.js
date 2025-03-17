@@ -23,6 +23,7 @@ export const styles = ScaledSheet.create({
     justifyContent: 'space-between',
   },
   title: {
+    marginInline: 'auto',
     color: 'white',
   },
 });
