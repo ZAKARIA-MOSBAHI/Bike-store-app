@@ -1,51 +1,34 @@
 import React, {useState} from 'react';
-import {View, Text, Pressable} from 'react-native';
+import {View, Pressable} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {colors} from '../../../../styles/colors';
-import BatteryIcon from '../../../../assets/icons/BatteryIcon';
-import AccessoryIcon from '../../../../assets/icons/AccessoryIcon';
-import MountainIcon from '../../../../assets/icons/MountainIcon';
-import RoadIcon from '../../../../assets/icons/RoadIcon';
 import {styles} from './CategoriesStyle';
 import {scale} from 'react-native-size-matters';
-import {typography} from '../../../../styles/typography';
-const categories = [
-  {
-    name: 'All',
-    icon: <Text style={[typography.p, {color: 'white'}]}>ALL</Text>,
-  },
-  {
-    name: 'Electrics',
-    icon: <BatteryIcon fillColor={colors.gray} />,
-  },
-  {
-    name: 'Road',
-    icon: <RoadIcon fillColor={colors.gray} />,
-  },
-  {
-    name: 'Mountain',
-    icon: <MountainIcon fillColor={colors.gray} />,
-  },
-  {
-    name: 'Accessory',
-    icon: <AccessoryIcon fillColor={colors.gray} />,
-  },
-];
-export default function Categories() {
+import {useCategoryStore} from '../../../../store/stores/categoryStore';
+export default function Categories({linear = true, style, filter}) {
+  const {categories} = useCategoryStore();
   const [chosenCategory, setChosenCategory] = useState('All');
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       {categories.map((c, i) => (
         <Pressable
           key={i}
-          style={[
-            styles.item,
-            {
-              left: scale(70) * i,
-              bottom: scale(10) * i,
-            },
-          ]}
-          onPress={() => setChosenCategory(c.name)}>
+          style={
+            linear
+              ? [
+                  styles.item,
+                  {
+                    left: scale(70) * i,
+                    bottom: scale(10) * i,
+                  },
+                ]
+              : null
+          }
+          onPress={() => {
+            setChosenCategory(c.name);
+            filter(c.name);
+          }}>
           <LinearGradient
             key={i}
             colors={

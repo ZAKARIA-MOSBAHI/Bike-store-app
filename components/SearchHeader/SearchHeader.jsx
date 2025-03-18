@@ -1,20 +1,22 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Text, TextInput, View} from 'react-native';
 import Button from '../ui/Button';
 import {styles} from './SearchHeaderStyle';
 import {typography} from '../../styles/typography';
 
-export default function SearchHeader({text, onPress, textStyle}) {
-  const [isActive, setIsActive] = useState(false);
-  const handleSearch = () => {
-    setIsActive(!isActive);
-    onPress();
-  };
+export default function SearchHeader({
+  text,
+  handleUserSearch,
+  textStyle,
+  isActive,
+  setIsActive,
+}) {
   return (
     <View style={styles.header}>
       <View style={styles.child}>
         {isActive && (
           <TextInput
+            onChangeText={input => handleUserSearch(input)}
             placeholder="Search for items"
             style={[styles.inputStyle, typography.p]}
             placeholderTextColor={'#fff'}

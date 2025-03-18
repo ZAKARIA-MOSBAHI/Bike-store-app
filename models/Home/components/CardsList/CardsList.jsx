@@ -1,16 +1,28 @@
 import React from 'react';
-import {FlatList, View} from 'react-native';
+import {FlatList, Text, View} from 'react-native';
 import {styles} from './CardsListStyle';
 import Card from '../Card/Card';
-import {products} from '../../../../assets/products';
+import {useProductStore} from '../../../../store/stores/productStore';
+import {typography} from '../../../../styles/typography';
+import {colors} from '../../../../styles/colors';
 
 export default function CardsList() {
+  const {filteredProducts} = useProductStore();
   return (
     <FlatList
       contentContainerStyle={styles.listContentStyle}
       style={styles.listStyle}
       numColumns={2}
-      data={products}
+      data={filteredProducts}
+      ListEmptyComponent={
+        <Text
+          style={[
+            typography.h2,
+            {textAlign: 'center', color: colors.gray, fontWeight: 'medium'},
+          ]}>
+          No Products Found
+        </Text>
+      }
       renderItem={({item, index}) => (
         <View key={index} style={styles.cardContainer}>
           <Card product={item} styling={item.style} />

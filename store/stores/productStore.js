@@ -87,6 +87,7 @@ export const useProductStore = create(set => ({
   ],
   filteredProducts: [],
   filterProducts: category => {
+    console.log(category);
     set(state => {
       if (category === 'All') {
         return {...state, filteredProducts: state.products};
@@ -94,6 +95,7 @@ export const useProductStore = create(set => ({
         const filtered = state.products.filter(item =>
           item.category.toLowerCase().includes(category.toLowerCase()),
         );
+        console.log(filtered);
         return {...state, filteredProducts: filtered};
       }
     });
