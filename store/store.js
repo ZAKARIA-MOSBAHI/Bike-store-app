@@ -1,7 +1,6 @@
 import {create} from 'zustand';
 
 export const useAppStore = create(set => ({
-  favorites: [],
   cart: [],
   bag: {
     subtotal: 0,
@@ -14,7 +13,7 @@ export const useAppStore = create(set => ({
       const isAlreadyInCart = state.cart.find(item => item.id === payload.id);
       if (!isAlreadyInCart) {
         return {
-          cart: [...state.cart, payload],
+          cart: [...state.cart, {...payload, quantity: 1}],
           bag: {
             ...state.bag,
             total: Math.round(state.bag.total + payload.price),
@@ -69,15 +68,4 @@ export const useAppStore = create(set => ({
     }),
   removeItem: id =>
     set(state => ({cart: state.cart.filter(item => item.id !== id)})),
-  addDiscount: payload => {
-    set(state => {
-      return {
-        ...state,
-        bag: {
-          ...state.bag,
-          discount: payload.discountRate,
-        },
-      };
-    });
-  },
 }));
