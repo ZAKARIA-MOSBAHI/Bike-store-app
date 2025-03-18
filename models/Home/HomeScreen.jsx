@@ -35,7 +35,6 @@ export default function HomeScreen() {
   // FUNCTION TO FILTER SEARCH RESULTS
   const filterSearchResults = category => {
     if (category.toLowerCase() === 'all') {
-      console.log(category);
       setFilteredList(searchResult);
     } else {
       const filteredListResult = searchResult.filter(product =>
@@ -52,6 +51,13 @@ export default function HomeScreen() {
   useEffect(() => {
     filterProducts('All');
   }, [filterProducts]);
+  // WHEN THE USER DISMISSES THE SEARCH VIEW , DELETE THE PREVIOUS SEARCH RESULTS
+  useEffect(() => {
+    if (!isActive) {
+      setSearchResult([]);
+      setFilteredList([]);
+    }
+  }, [isActive]);
 
   return (
     <>

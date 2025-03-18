@@ -25,12 +25,12 @@ const footerMenu = [
     route: 'Cart',
   },
   {
-    name: 'profile',
-    icon: PersonIcon,
-  },
-  {
     name: 'document',
     icon: DocumentIcon,
+  },
+  {
+    name: 'profile',
+    icon: PersonIcon,
   },
 ];
 const background = require('../../assets/images/footerBackground.png');
