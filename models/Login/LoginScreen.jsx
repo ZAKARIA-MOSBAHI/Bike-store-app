@@ -1,9 +1,11 @@
 import React from 'react';
 import {KeyboardAvoidingView, Pressable, Text, View} from 'react-native';
-import {styles} from './LoginStyle';
 
 import LoginInputs from './LoginInputs/LoginInputs';
-export default function Login({setPageType}) {
+import {styles} from './LoginScreenStyle';
+import {useNavigation} from '@react-navigation/native';
+export default function LoginScreen() {
+  const navigation = useNavigation();
   return (
     <KeyboardAvoidingView style={styles.container}>
       <View style={styles.childContainer}>
@@ -11,7 +13,7 @@ export default function Login({setPageType}) {
         <LoginInputs />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Don't have an account ?</Text>
-          <Pressable onPress={() => setPageType('Signup')}>
+          <Pressable onPress={() => navigation.navigate('Signup')}>
             <Text style={styles.footerAction}>Sign up</Text>
           </Pressable>
         </View>

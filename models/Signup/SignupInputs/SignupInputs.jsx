@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {Alert, Pressable, Text, TextInput, View} from 'react-native';
 import {styles} from './SignupInputsStyle';
-import {useAppStore} from '../../../../../store/store';
+import {useAppStore} from '../../../store/store';
 import {useNavigation} from '@react-navigation/native';
-import HidePasswordIcon from '../../../../../assets/icons/HidePasswordIcon';
-import ShowPasswordIcon from '../../../../../assets/icons/ShowPasswordIcon';
+import HidePasswordIcon from '../../../assets/icons/HidePasswordIcon';
+import ShowPasswordIcon from '../../../assets/icons/ShowPasswordIcon';
 
 export default function SignupInputs() {
   const navigation = useNavigation();
@@ -25,7 +25,6 @@ export default function SignupInputs() {
     const emailRegex = /\S+@\S+\.\S+/;
     const {email, password, confirmPassword} = formData;
     const newErrors = {};
-    console.log(email.trim().length);
     if (email.trim().length === 0) {
       newErrors.email = 'Email is required';
     } else if (!emailRegex.test(email)) {

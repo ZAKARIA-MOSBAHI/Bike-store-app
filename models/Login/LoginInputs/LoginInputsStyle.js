@@ -1,7 +1,6 @@
 import {ScaledSheet} from 'react-native-size-matters/extend';
-import {colors} from '../../../../../styles/colors';
-import {typography} from '../../../../../styles/typography';
-
+import {colors} from '../../../styles/colors';
+import {typography} from '../../../styles/typography';
 export const styles = ScaledSheet.create({
   inputsContainer: {gap: '16@s'},
   input: {

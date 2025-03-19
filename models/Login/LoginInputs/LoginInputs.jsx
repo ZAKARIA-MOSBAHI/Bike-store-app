@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import {styles} from './LoginInputsStyle';
+import React, {useState} from 'react';
 import {Alert, Pressable, Text, TextInput, View} from 'react-native';
-import {useAppStore} from '../../../../../store/store';
-import ShowPasswordIcon from '../../../../../assets/icons/ShowPasswordIcon';
-import HidePasswordIcon from '../../../../../assets/icons/HidePasswordIcon';
+
 import {useNavigation} from '@react-navigation/native';
+import {useAppStore} from '../../../store/store';
+import {styles} from './LoginInputsStyle';
+import HidePasswordIcon from '../../../assets/icons/HidePasswordIcon';
+import ShowPasswordIcon from '../../../assets/icons/ShowPasswordIcon';
 
 export default function LoginInputs() {
   const navigation = useNavigation();

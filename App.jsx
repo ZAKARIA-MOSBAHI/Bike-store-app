@@ -7,12 +7,14 @@ import CartScreen from './models/Cart/CartScreen';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import CheckoutScreen from './models/Checkout/CheckoutScreen';
 
-import RegisterScreen from './models/Register/RegisterScreen';
+import LoginScreen from './models/Login/LoginScreen';
+import SignupScreen from './models/Signup/SignupScreen';
 
 const RootStack = createNativeStackNavigator({
-  initialRouteName: 'Register',
+  initialRouteName: 'Login',
   screens: {
-    Register: RegisterScreen,
+    Login: LoginScreen,
+    Signup: SignupScreen,
     Home: HomeScreen,
     Product: ProductScreen,
     Cart: CartScreen,
