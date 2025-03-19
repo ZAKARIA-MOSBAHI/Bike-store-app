@@ -3,19 +3,16 @@ import {colors} from '../../styles/colors';
 
 export const styles = ScaledSheet.create({
   quantityCounter: {
-    backgroundColor: colors.dark,
     borderRadius: 8,
-    flexDirection: 'row',
     alignItems: 'center',
+    flexDirection: 'row',
   },
   productQuantity: {
-    marginInline: '8@s',
     color: colors.gray,
     fontWeight: 'bold',
+    marginInline: '8@s',
   },
   counterBtn: {
-    width: '28@s',
-    height: '28@vs',
     alignItems: 'center',
     justifyContent: 'center',
     mixBlendMode: 'screen',

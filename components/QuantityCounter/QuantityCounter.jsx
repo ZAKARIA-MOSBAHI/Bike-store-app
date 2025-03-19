@@ -2,11 +2,8 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import Button from '../ui/Button';
 import {colors} from '../../styles/colors';
-import {
-  scale,
-  ScaledSheet,
-  verticalScale,
-} from 'react-native-size-matters/extend';
+import {scale, verticalScale} from 'react-native-size-matters/extend';
+import {styles} from './QuantityCounterStyle';
 
 export default function QuantityCounter({
   quantity,
@@ -49,21 +46,3 @@ export default function QuantityCounter({
     </View>
   );
 }
-
-const styles = ScaledSheet.create({
-  quantityCounter: {
-    borderRadius: 8,
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  productQuantity: {
-    color: colors.gray,
-    fontWeight: 'bold',
-    marginInline: scale(8),
-  },
-  counterBtn: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    mixBlendMode: 'screen',
-  },
-});

@@ -17,8 +17,10 @@ export default function Card({styling, product}) {
   const [productQuantity, setProductQuantity] = useState(0);
   const handleFavorite = () => {
     if (isFavorite) {
+      setIsFavorite(false);
       removeFavorite(product);
     } else {
+      setIsFavorite(true);
       addFavorite(product);
     }
   };
@@ -51,7 +53,7 @@ export default function Card({styling, product}) {
         style={[styles.background, styling]}>
         <View style={styles.productImageContainer}>
           <Image source={product.img} style={styles.productImage} />
-          <Pressable onPress={() => handleFavorite()} style={styles.heartBtn}>
+          <Pressable onPress={handleFavorite} style={styles.heartBtn}>
             <HeartIcon isFavorite={isFavorite} />
           </Pressable>
         </View>

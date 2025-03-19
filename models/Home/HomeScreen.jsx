@@ -1,3 +1,4 @@
+//TO ADD : IF THE FILTER IS SET BEFORE SEARCHING , APPLY IT AND THEN SEARCH
 import React, {useCallback, useEffect, useState} from 'react';
 import {ImageBackground, ScrollView, View} from 'react-native';
 import Categories from './components/Categories/Categories';
