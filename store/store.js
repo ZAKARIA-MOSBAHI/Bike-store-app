@@ -1,6 +1,13 @@
 import {create} from 'zustand';
 
-export const useAppStore = create(set => ({
+export const useAppStore = create((set, get) => ({
+  users: [
+    {
+      email: 'user@example.com',
+      password: '123456789',
+    },
+    {email: 'user2@example.com', password: 'password2'},
+  ],
   user: {
     email: null,
     password: null,
@@ -12,6 +19,9 @@ export const useAppStore = create(set => ({
     discount: 0,
     total: 0,
   },
+  error: null,
+  isLoggedIn: false,
+
   addToCart: payload =>
     set(state => {
       console.log('payload price : ', payload.price);
@@ -73,4 +83,30 @@ export const useAppStore = create(set => ({
     }),
   removeItem: id =>
     set(state => ({cart: state.cart.filter(item => item.id !== id)})),
+  resetError: async () => {
+    set({error: null});
+  },
+
+  getUser: data => {
+    const {users} = get();
+    let userFound = false;
+    const error = {};
+    users.forEach(user => {
+      if (user.email === data.email) {
+        if (user.password === data.password) {
+          userFound = true;
+        } else {
+          error.password = 'Password is incorrect';
+        }
+      } else {
+        error.email = 'Email is not found';
+      }
+    });
+    if (userFound) {
+      set({isLoggedIn: true});
+      set({user: data});
+    } else {
+      set({error: error});
+    }
+  },
 }));

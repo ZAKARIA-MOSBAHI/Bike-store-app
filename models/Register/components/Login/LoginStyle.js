@@ -14,37 +14,7 @@ export const styles = ScaledSheet.create({
     ...typography.h1,
     color: '#fff',
   },
-  inputsContainer: {gap: '16@s'},
-  input: {
-    borderWidth: 1,
-    borderColor: colors.secondary,
-    borderRadius: 8,
-    paddingTop: '16@vs',
-    paddingBottom: '16@vs',
-    paddingLeft: '16@s',
-    fontSize: '16@s',
-  },
-  btnsContainer: {gap: '16@s'},
-  btn: {paddingVertical: '16@vs', borderRadius: 8},
-  btnPrimary: {
-    backgroundColor: colors.secondary,
-  },
-  primaryBtnText: {
-    ...typography.h3,
-    color: '#fff',
-    fontWeight: 'medium',
-    textAlign: 'center',
-  },
-  btnOutline: {
-    borderColor: colors.secondary,
-    borderWidth: 1,
-  },
-  outlineBtnText: {
-    color: colors.secondary,
-    fontWeight: 'medium',
-    textAlign: 'center',
-    ...typography.h3,
-  },
+
   footer: {flexDirection: 'row', gap: '8@s', justifyContent: 'flex-end'},
   footerText: {...typography.p, color: '#fff', textAlign: 'right'},
   footerAction: {
