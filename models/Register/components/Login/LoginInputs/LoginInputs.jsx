@@ -62,9 +62,7 @@ export default function LoginInputs() {
       setErrors(formErrors);
     }
   };
-  useEffect(() => {
-    console.log(showPassword);
-  }, [showPassword]);
+
   return (
     <>
       <View style={styles.inputsContainer}>

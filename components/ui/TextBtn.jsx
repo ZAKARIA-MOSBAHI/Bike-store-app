@@ -11,19 +11,8 @@ export default function TextBtn({
   variant,
   gradient = true,
 }) {
-  const variants = {
-    primary: {
-      backgroundColor: colors.secondary,
-      paddingVertical: verticalScale(16),
-    },
-    outline: {
-      borderColor: colors.secondary,
-      borderWidth: 1,
-      paddingVertical: verticalScale(16),
-    },
-  };
   return (
-    <Pressable style={variants[variant]} onPress={onPress}>
+    <Pressable onPress={onPress}>
       {gradient && (
         <LinearGradient
           style={style ? style : styles.btn}

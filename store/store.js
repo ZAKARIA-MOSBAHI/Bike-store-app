@@ -109,4 +109,14 @@ export const useAppStore = create((set, get) => ({
       set({error: error});
     }
   },
+  addUser: data => {
+    const {users} = get();
+    try {
+      set({user: data, users: [...users, data]});
+      console.log(get());
+      return true;
+    } catch (error) {
+      return error;
+    }
+  },
 }));

@@ -1,18 +1,15 @@
 import React from 'react';
-import {ImageBackground, Text, TextInput, View} from 'react-native';
+import {ImageBackground, Pressable, Text, TextInput, View} from 'react-native';
 import TextBtn from '../../../../components/ui/TextBtn';
 import {typography} from '../../../../styles/typography';
 import {styles} from './CouponInputStyle';
 import {colors} from '../../../../styles/colors';
+import LinearGradient from 'react-native-linear-gradient';
 
 const inputBackground = require('../../../../assets/images/coupon-input-background.png');
-const coupons = ['bike'];
 export default function CouponInput() {
   const handleChange = input => {
-    if (coupons.includes(input)) {
-      console.log(true);
-      // adding the discount
-    }
+    console.log(input);
   };
   return (
     <ImageBackground source={inputBackground} style={styles.container}>
@@ -23,9 +20,15 @@ export default function CouponInput() {
           placeholder="add your coupon code"
           style={[typography.p, styles.input]}
         />
-        <TextBtn style={styles.applyBtn}>
-          <Text style={[[typography.h3], styles.textBtn]}>Apply</Text>
-        </TextBtn>
+        <Pressable>
+          <LinearGradient
+            style={styles.applyBtn}
+            colors={colors.gradientPrimary}
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 1}}>
+            <Text style={[[typography.h3], styles.textBtn]}>Apply</Text>
+          </LinearGradient>
+        </Pressable>
       </View>
     </ImageBackground>
   );

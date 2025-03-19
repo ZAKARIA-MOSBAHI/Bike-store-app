@@ -66,13 +66,12 @@ export default function Card({styling, product}) {
           <View style={styles.quantityCounterContainer}>
             <Text style={[styles.price, typography.h4]}>$ {product.price}</Text>
             <QuantityCounter
+              hide={productQuantity > 0 ? '' : 'minus'}
               style={styles.quantityCounter}
               size="xs"
               dark={false}
               quantity={productQuantity}
-              onMinusClick={() =>
-                productQuantity > 0 ? decrementQuantity(product.id) : null
-              }
+              onMinusClick={() => decrementQuantity(product.id)}
               onPlusClick={() =>
                 productQuantity > 0
                   ? incrementQuantity(product.id)

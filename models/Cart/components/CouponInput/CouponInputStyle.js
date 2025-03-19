@@ -23,9 +23,10 @@ export const styles = ScaledSheet.create({
   applyBtn: {
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 10,
     paddingInline: '40@s',
     height: '100%',
+    borderRadius: 9,
+    mixBlendMode: 'screen',
   },
   textBtn: {color: '#fff', fontWeight: 'bold'},
 });
