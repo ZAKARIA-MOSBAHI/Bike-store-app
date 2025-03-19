@@ -1,9 +1,15 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {styles} from './LoginInputsStyle';
 import {Alert, Pressable, Text, TextInput, View} from 'react-native';
 import {useAppStore} from '../../../../../store/store';
+import ShowPasswordIcon from '../../../../../assets/icons/ShowPasswordIcon';
+import HidePasswordIcon from '../../../../../assets/icons/HidePasswordIcon';
+import {useNavigation} from '@react-navigation/native';
 
 export default function LoginInputs() {
+  const navigation = useNavigation();
+
+  const [showPassword, setShowPassword] = useState(false);
   const {getUser, resetError} = useAppStore();
   const [formData, setFormData] = useState({
     email: '',
@@ -56,6 +62,9 @@ export default function LoginInputs() {
       setErrors(formErrors);
     }
   };
+  useEffect(() => {
+    console.log(showPassword);
+  }, [showPassword]);
   return (
     <>
       <View style={styles.inputsContainer}>
@@ -70,14 +79,29 @@ export default function LoginInputs() {
           {errors.email && <Text style={styles.error}>{errors.email}</Text>}
         </View>
         <View>
-          <TextInput
-            style={styles.input}
-            secureTextEntry={true}
-            placeholder="Password"
-            onChangeText={input =>
-              setFormData(prev => ({...prev, password: input}))
-            }
-          />
+          <View style={styles.passwordInputContainer}>
+            <TextInput
+              style={styles.input}
+              secureTextEntry={showPassword ? false : true}
+              placeholder="Password"
+              onChangeText={input =>
+                setFormData(prev => ({...prev, password: input}))
+              }
+            />
+            {showPassword ? (
+              <Pressable
+                style={styles.passwordIcon}
+                onPress={() => setShowPassword(false)}>
+                <HidePasswordIcon />
+              </Pressable>
+            ) : (
+              <Pressable
+                style={styles.passwordIcon}
+                onPress={() => setShowPassword(true)}>
+                <ShowPasswordIcon />
+              </Pressable>
+            )}
+          </View>
           <Pressable>
             <Text style={styles.forgotPassword}>Forgot Password?</Text>
           </Pressable>
@@ -92,7 +116,9 @@ export default function LoginInputs() {
           onPress={handleSubmit}>
           <Text style={styles.primaryBtnText}>Log in</Text>
         </Pressable>
-        <Pressable style={[styles.btn, styles.btnOutline]}>
+        <Pressable
+          style={[styles.btn, styles.btnOutline]}
+          onPress={() => navigation.navigate('Home')}>
           <Text style={styles.outlineBtnText}>Continue as guest</Text>
         </Pressable>
       </View>

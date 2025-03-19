@@ -13,6 +13,9 @@ export const styles = ScaledSheet.create({
     paddingLeft: '16@s',
     fontSize: '16@s',
   },
+  passwordInputContainer: {
+    position: 'relative',
+  },
   btnsContainer: {gap: '16@s'},
   btn: {paddingVertical: '16@vs', borderRadius: 8},
   btnPrimary: {
@@ -43,5 +46,11 @@ export const styles = ScaledSheet.create({
     textDecorationLine: 'underline',
     textAlign: 'right',
     marginTop: '4@s',
+  },
+  passwordIcon: {
+    position: 'absolute',
+    right: 10,
+    top: '50%',
+    transform: [{translateY: '-45%'}],
   },
 });
