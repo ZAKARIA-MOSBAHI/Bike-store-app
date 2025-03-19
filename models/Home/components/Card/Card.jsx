@@ -6,14 +6,22 @@ import {typography} from '../../../../styles/typography';
 import {useNavigation} from '@react-navigation/native';
 import QuantityCounter from '../../../../components/QuantityCounter/QuantityCounter';
 import {useAppStore} from '../../../../store/store';
-import {scale, verticalScale} from 'react-native-size-matters/extend';
+import {useFavoriteStore} from '../../../../store/stores/favoriteStore';
 
 const bg = require('../../../../assets/images/card.png');
 export default function Card({styling, product}) {
-  const {cart, incrementQuantity, decrementQuantity} = useAppStore();
+  const {cart, incrementQuantity, decrementQuantity, addToCart} = useAppStore();
+  const {addFavorite, favorites, removeFavorite} = useFavoriteStore();
+
   const [isFavorite, setIsFavorite] = useState(false);
   const [productQuantity, setProductQuantity] = useState(0);
-
+  const handleFavorite = () => {
+    if (isFavorite) {
+      removeFavorite(product);
+    } else {
+      addFavorite(product);
+    }
+  };
   const navigation = useNavigation();
   useEffect(() => {
     const productInCart = cart.find(item => {
@@ -25,6 +33,12 @@ export default function Card({styling, product}) {
       setProductQuantity(0);
     }
   }, [cart, product]);
+  useEffect(() => {
+    const productIsFavored = favorites.find(item => item.id === product.id);
+    if (productIsFavored) {
+      setIsFavorite(true);
+    }
+  }, [isFavorite, favorites, product]);
   return (
     <Pressable
       style={styles.card}
@@ -37,9 +51,7 @@ export default function Card({styling, product}) {
         style={[styles.background, styling]}>
         <View style={styles.productImageContainer}>
           <Image source={product.img} style={styles.productImage} />
-          <Pressable
-            onPress={() => setIsFavorite(!isFavorite)}
-            style={styles.heartBtn}>
+          <Pressable onPress={() => handleFavorite()} style={styles.heartBtn}>
             <HeartIcon isFavorite={isFavorite} />
           </Pressable>
         </View>
@@ -48,23 +60,25 @@ export default function Card({styling, product}) {
             {product.category}
           </Text>
           <Text style={[styles.name, typography.p]}>{product.name}</Text>
-          <Text style={[styles.price, typography.h4]}>$ {product.price}</Text>
+
+          <View style={styles.quantityCounterContainer}>
+            <Text style={[styles.price, typography.h4]}>$ {product.price}</Text>
+            <QuantityCounter
+              style={styles.quantityCounter}
+              size="xs"
+              dark={false}
+              quantity={productQuantity}
+              onMinusClick={() =>
+                productQuantity > 0 ? decrementQuantity(product.id) : null
+              }
+              onPlusClick={() =>
+                productQuantity > 0
+                  ? incrementQuantity(product.id)
+                  : addToCart(product)
+              }
+            />
+          </View>
         </View>
-        {productQuantity !== 0 && (
-          <QuantityCounter
-            style={{
-              position: 'absolute',
-              right: scale(8),
-              bottom: verticalScale(36),
-            }}
-            direction="column"
-            size="sm"
-            dark={false}
-            quantity={productQuantity}
-            onMinusClick={() => decrementQuantity(product.id)}
-            onPlusClick={() => incrementQuantity(product.id)}
-          />
-        )}
       </ImageBackground>
     </Pressable>
   );

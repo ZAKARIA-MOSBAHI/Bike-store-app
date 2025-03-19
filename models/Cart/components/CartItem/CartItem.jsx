@@ -1,7 +1,6 @@
 import React from 'react';
 import {Image, ImageBackground, Text, View} from 'react-native';
 import {typography} from '../../../../styles/typography';
-import Button from '../../../../components/ui/Button';
 import {styles} from './CartItemStyle';
 import {useAppStore} from '../../../../store/store';
 import QuantityCounter from '../../../../components/QuantityCounter/QuantityCounter';

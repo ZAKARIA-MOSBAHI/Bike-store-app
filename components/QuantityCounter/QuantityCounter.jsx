@@ -13,11 +13,11 @@ export default function QuantityCounter({
   onPlusClick,
   onMinusClick,
   size = 'default',
-  direction = 'row',
   style,
   dark = true,
 }) {
   const sizes = {
+    xs: 20,
     sm: 24,
     default: 28,
   };
@@ -25,7 +25,7 @@ export default function QuantityCounter({
     <View
       style={[
         styles.quantityCounter,
-        {flexDirection: direction, backgroundColor: dark ? colors.dark : null},
+        {backgroundColor: dark ? colors.dark : null},
         style,
       ]}>
       <Button
@@ -36,15 +36,7 @@ export default function QuantityCounter({
         type="plus"
         onPress={onPlusClick}
       />
-      <Text
-        style={[
-          styles.productQuantity,
-          direction === 'row'
-            ? {marginInline: scale(8)}
-            : {marginBlock: verticalScale(8)},
-        ]}>
-        {quantity}
-      </Text>
+      <Text style={[styles.productQuantity]}>{quantity}</Text>
       <Button
         style={[
           styles.counterBtn,
@@ -62,10 +54,12 @@ const styles = ScaledSheet.create({
   quantityCounter: {
     borderRadius: 8,
     alignItems: 'center',
+    flexDirection: 'row',
   },
   productQuantity: {
     color: colors.gray,
     fontWeight: 'bold',
+    marginInline: scale(8),
   },
   counterBtn: {
     alignItems: 'center',

@@ -21,6 +21,7 @@ export const styles = ScaledSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: '4@vs',
+    paddingRight: '8@s',
   },
   productPrice: {color: colors.secondary, fontWeight: 'bold'},
 

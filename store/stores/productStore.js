@@ -68,7 +68,7 @@ export const useProductStore = create(set => ({
       id: 7,
       name: 'PILOT - Chromoly',
       category: 'Mountain Bike',
-      price: '1.999.99',
+      price: 1999.99,
       img: require('../../assets/images/bicycle3.png'),
       largeImage: require('../../assets/images/bicycle3-lg.png'),
       description:

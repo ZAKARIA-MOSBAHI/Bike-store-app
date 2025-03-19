@@ -10,6 +10,7 @@ export const useAppStore = create(set => ({
   },
   addToCart: payload =>
     set(state => {
+      console.log('payload price : ', payload.price);
       const isAlreadyInCart = state.cart.find(item => item.id === payload.id);
       if (!isAlreadyInCart) {
         return {
