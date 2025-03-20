@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import HomeScreen from './models/Home/HomeScreen';
 import ProductScreen from './models/Product/ProductScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -9,6 +9,7 @@ import CheckoutScreen from './models/Checkout/CheckoutScreen';
 
 import LoginScreen from './models/Login/LoginScreen';
 import SignupScreen from './models/Signup/SignupScreen';
+import SplashScreen from 'react-native-splash-screen';
 
 const RootStack = createNativeStackNavigator({
   initialRouteName: 'Login',
@@ -26,6 +27,9 @@ const RootStack = createNativeStackNavigator({
 });
 const Navigation = createStaticNavigation(RootStack);
 export default function App() {
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
   return (
     <GestureHandlerRootView>
       <Navigation />
