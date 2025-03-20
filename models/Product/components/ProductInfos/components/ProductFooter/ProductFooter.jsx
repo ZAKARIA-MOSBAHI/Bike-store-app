@@ -6,16 +6,19 @@ import {styles} from './ProductFooterStyle';
 import {useAppStore} from '../../../../../../store/store';
 
 export default function ProductFooter({product}) {
-  const {cart, addToCart} = useAppStore();
+  const {addToCart} = useAppStore();
 
-  const h = () => {
+  const handleAddToCart = () => {
     addToCart({...product, quantity: 1});
   };
+
   return (
     <View style={styles.footerContainer}>
       <Text style={[typography.h1, {color: '#3D9CEA'}]}>${product.price}</Text>
-      <TextBtn onPress={() => h()}>
-        <Text style={[typography.p, {color: 'white'}]}>Add To Cart</Text>
+      <TextBtn onPress={handleAddToCart}>
+        <Text style={[typography.p, {color: 'white', textAlign: 'center'}]}>
+          Add To Cart
+        </Text>
       </TextBtn>
     </View>
   );

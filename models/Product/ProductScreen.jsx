@@ -2,13 +2,14 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useEffect, useRef, useState} from 'react';
 import {Animated, ImageBackground, View, Dimensions} from 'react-native';
 import Header from '../../components/Header/Header';
-import {products} from '../../assets/products';
 import {styles} from './ProductScreenStyle';
 import ProductImage from './components/ProductImage/ProductImage';
 import ProductInfos from './components/ProductInfos/ProductInfos';
+import {useProductStore} from '../../store/stores/productStore';
 const background = require('../../assets/images/Background.png');
 
 export default function ProductScreen() {
+  const {products} = useProductStore();
   const [isOpen, setIsOpen] = useState(false);
   const [activeBtn, setActiveBtn] = useState(null);
   const opacity = useRef(new Animated.Value(0)).current;

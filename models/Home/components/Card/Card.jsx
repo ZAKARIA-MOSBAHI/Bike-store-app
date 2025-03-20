@@ -66,9 +66,11 @@ export default function Card({styling, product}) {
           <View style={styles.quantityCounterContainer}>
             <Text style={[styles.price, typography.h4]}>$ {product.price}</Text>
             <QuantityCounter
-              hide={productQuantity > 0 ? '' : 'minus'}
+              containerStyle={{borderRadius: 4}}
+              plusIconStyle={{width: 14, height: 14}}
+              hide={productQuantity > 0 ? null : true}
               style={styles.quantityCounter}
-              size="xs"
+              size="sm"
               dark={false}
               quantity={productQuantity}
               onMinusClick={() => decrementQuantity(product.id)}

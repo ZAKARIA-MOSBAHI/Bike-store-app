@@ -4,6 +4,7 @@ import {typography} from '../../../../styles/typography';
 import {styles} from './CartItemStyle';
 import {useAppStore} from '../../../../store/store';
 import QuantityCounter from '../../../../components/QuantityCounter/QuantityCounter';
+import {scale} from 'react-native-size-matters/extend';
 const CartItemBackground = require('../../../../assets/images/cart-item-background.png');
 
 export default function CartItem({item}) {
@@ -24,6 +25,7 @@ export default function CartItem({item}) {
             <Text style={([typography.p], styles.productPrice)}>$ {price}</Text>
 
             <QuantityCounter
+              containerStyle={{borderRadius: scale(8)}}
               quantity={quantity}
               onPlusClick={() => incrementQuantity(item.id)}
               onMinusClick={() => decrementQuantity(item.id)}

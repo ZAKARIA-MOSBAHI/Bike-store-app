@@ -14,7 +14,9 @@ export default function Button({
   type = 'search',
   variant = 'default',
   onPress,
+  iconStyle,
   style,
+  containerStyle,
 }) {
   const variants = {dark: colors.gradientDark, default: colors.gradientPrimary};
   const types = {
@@ -25,24 +27,21 @@ export default function Button({
     plus: {icon: PlusIcon},
     minus: {icon: MinusIcon},
   };
-
+  const IconComponent = types[type].icon;
   return (
     <LinearGradient
-      style={styles.btnContainer}
+      style={containerStyle}
       colors={variants[variant]}
       start={{x: 0, y: 0}}
       end={{x: 1, y: 1}}>
       <Pressable style={style ? style : styles.btn} onPress={onPress}>
-        {types[type].icon}
+        <IconComponent style={iconStyle} />
       </Pressable>
     </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-  btnContainer: {
-    borderRadius: scale(9),
-  },
   btn: {
     width: scale(44),
     height: verticalScale(44),

@@ -6,6 +6,9 @@ import {scale, verticalScale} from 'react-native-size-matters/extend';
 import {styles} from './QuantityCounterStyle';
 
 export default function QuantityCounter({
+  containerStyle,
+  plusIconStyle,
+  minusIconStyle,
   hide,
   quantity,
   onPlusClick,
@@ -26,27 +29,32 @@ export default function QuantityCounter({
         {backgroundColor: dark ? colors.dark : null},
         style,
       ]}>
-      {hide === 'plus' ? null : (
-        <Button
-          style={[
-            styles.counterBtn,
-            {width: scale(sizes[size]), height: verticalScale(sizes[size])},
-          ]}
-          type="plus"
-          onPress={onPlusClick}
-        />
-      )}
-      <Text style={[styles.productQuantity]}>{quantity}</Text>
-      {hide === 'minus' ? null : (
-        <Button
-          style={[
-            styles.counterBtn,
-            {height: verticalScale(sizes[size]), width: scale(sizes[size])},
-          ]}
-          type="minus"
-          variant="dark"
-          onPress={onMinusClick}
-        />
+      <Button
+        style={[
+          styles.counterBtn,
+          {width: scale(sizes[size]), height: verticalScale(sizes[size])},
+        ]}
+        type="plus"
+        iconStyle={plusIconStyle}
+        onPress={onPlusClick}
+        containerStyle={containerStyle}
+      />
+
+      {hide === true ? null : (
+        <>
+          <Text style={[styles.productQuantity]}>{quantity}</Text>
+          <Button
+            style={[
+              styles.counterBtn,
+              {height: verticalScale(sizes[size]), width: scale(sizes[size])},
+            ]}
+            type="minus"
+            variant="dark"
+            iconStyle={minusIconStyle}
+            onPress={onMinusClick}
+            containerStyle={containerStyle}
+          />
+        </>
       )}
     </View>
   );

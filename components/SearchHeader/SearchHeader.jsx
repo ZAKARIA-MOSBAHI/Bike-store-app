@@ -3,6 +3,7 @@ import {Text, TextInput, View} from 'react-native';
 import Button from '../ui/Button';
 import {styles} from './SearchHeaderStyle';
 import {typography} from '../../styles/typography';
+import {scale} from 'react-native-size-matters';
 
 export default function SearchHeader({
   text,
@@ -26,6 +27,7 @@ export default function SearchHeader({
           <Text style={[styles.title, typography.h2, textStyle]}>{text}</Text>
         )}
         <Button
+          containerStyle={{borderRadius: scale(8)}}
           type={isActive ? 'close' : 'search'}
           onPress={() => {
             setIsActive(!isActive);

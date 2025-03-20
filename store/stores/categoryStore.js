@@ -27,7 +27,7 @@ export const useCategoryStore = create(set => ({
       icon: <MountainIcon fillColor={colors.gray} />,
     },
     {
-      name: 'Accessory',
+      name: 'Accessories',
       icon: <AccessoryIcon fillColor={colors.gray} />,
     },
   ],

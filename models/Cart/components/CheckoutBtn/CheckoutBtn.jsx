@@ -13,6 +13,7 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 import {useNavigation} from '@react-navigation/native';
+import {scale} from 'react-native-size-matters/extend';
 
 const inputBackground = require('../../../../assets/images/coupon-input-background.png');
 
@@ -52,7 +53,11 @@ export default function CheckoutBtn() {
       <View style={styles.couponInputContainer}>
         <GestureDetector gesture={panGesture}>
           <Animated.View style={[AnimatedStyle, {zIndex: 10}]}>
-            <Button type="back" style={styles.btn} />
+            <Button
+              containerStyle={{borderRadius: scale(8)}}
+              type="back"
+              style={styles.btn}
+            />
           </Animated.View>
         </GestureDetector>
         {!isDragged ? (

@@ -22,7 +22,6 @@ export default function TextBtn({
           {children}
         </LinearGradient>
       )}
-      {children}
     </Pressable>
   );
 }
