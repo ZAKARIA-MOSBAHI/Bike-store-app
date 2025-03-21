@@ -39,7 +39,7 @@ export const styles = ScaledSheet.create({
   },
   passwordIcon: {
     position: 'absolute',
-    right: 10,
+    right: '10@s',
     top: '50%',
     transform: [{translateY: '-45%'}],
   },

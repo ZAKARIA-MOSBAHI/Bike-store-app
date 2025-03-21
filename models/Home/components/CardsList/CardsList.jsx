@@ -5,6 +5,8 @@ import Card from '../Card/Card';
 import {useProductStore} from '../../../../store/stores/productStore';
 import {typography} from '../../../../styles/typography';
 import {colors} from '../../../../styles/colors';
+import HeroContainer from '../HeroContainer/HeroContainer';
+import Categories from '../Categories/Categories';
 
 export default function CardsList() {
   const {filteredProducts, filterProducts} = useProductStore();
@@ -17,6 +19,12 @@ export default function CardsList() {
       style={styles.listStyle}
       numColumns={2}
       data={filteredProducts}
+      ListHeaderComponent={
+        <>
+          <HeroContainer />
+          <Categories filter={filterProducts} />
+        </>
+      }
       ListEmptyComponent={
         <Text
           style={[

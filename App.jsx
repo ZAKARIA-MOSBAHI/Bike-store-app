@@ -10,6 +10,7 @@ import CheckoutScreen from './models/Checkout/CheckoutScreen';
 import LoginScreen from './models/Login/LoginScreen';
 import SignupScreen from './models/Signup/SignupScreen';
 import SplashScreen from 'react-native-splash-screen';
+import ProfileScreen from './models/Profile/ProfileScreen';
 
 const RootStack = createNativeStackNavigator({
   initialRouteName: 'Login',
@@ -20,6 +21,7 @@ const RootStack = createNativeStackNavigator({
     Product: ProductScreen,
     Cart: CartScreen,
     Checkout: CheckoutScreen,
+    Profile: ProfileScreen,
   },
   screenOptions: {
     headerShown: false,

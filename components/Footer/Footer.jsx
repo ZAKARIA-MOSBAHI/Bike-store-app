@@ -31,6 +31,7 @@ const footerMenu = [
   {
     name: 'profile',
     icon: PersonIcon,
+    route: 'Profile',
   },
 ];
 const background = require('../../assets/images/footerBackground.png');

@@ -1,28 +1,29 @@
 import {ScaledSheet} from 'react-native-size-matters/extend';
 import {colors} from '../../styles/colors';
+import {typography} from '../../styles/typography';
 
 export const styles = ScaledSheet.create({
   container: {
     flexDirection: 'row',
     gap: '16@s',
     paddingInline: '10@s',
-    paddingBlock: '20@vs',
+    paddingBlock: '30@vs',
   },
-  productBgImage: {width: '90@s', height: '90@vs'},
+  productBgImage: {width: '90@s', height: '100@vs', justifySelf: 'center'},
   productImg: {width: '90%', height: '100%', marginInline: 'auto'},
   itemInfoContainer: {
     flex: 1,
+    gap: '8@s',
     justifyContent: 'space-between',
-    marginBlock: '10@vs',
   },
-  productName: {color: 'white', fontWeight: 'bold'},
+  productName: {...typography.p, color: 'white', fontWeight: 'bold'},
+  productDescription: {color: colors.gray},
   priceContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: '4@vs',
   },
-  productPrice: {color: colors.secondary, fontWeight: 'bold'},
+  productPrice: {...typography.p, color: colors.secondary, fontWeight: 'bold'},
 
   cartDivider: {
     width: '100%',

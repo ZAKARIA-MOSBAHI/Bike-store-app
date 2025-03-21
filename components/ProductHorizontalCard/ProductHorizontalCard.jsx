@@ -3,12 +3,13 @@ import {useNavigation} from '@react-navigation/native';
 import {Image, ImageBackground, Pressable, Text, View} from 'react-native';
 import {styles} from './ProductHorizontalCardStyle';
 import {typography} from '../../styles/typography';
+import {colors} from '../../styles/colors';
 
 const CartItemBackground = require('../../assets/images/cart-item-background.png');
 
 export default function ProductHorizontalCard({item}) {
   const navigation = useNavigation();
-  const {img, name, price} = item;
+  const {img, name, price, description} = item;
   return (
     <>
       <Pressable
@@ -21,9 +22,13 @@ export default function ProductHorizontalCard({item}) {
           <Image source={img} style={styles.productImg} resizeMode="contain" />
         </ImageBackground>
         <View style={styles.itemInfoContainer}>
-          <Text style={([typography.h3], styles.productName)}>{name}</Text>
+          <Text style={styles.productName}>{name}</Text>
+          <Text style={styles.productDescription} numberOfLines={2}>
+            {description}
+          </Text>
+
           <View style={styles.priceContainer}>
-            <Text style={([typography.p], styles.productPrice)}>$ {price}</Text>
+            <Text style={styles.productPrice}>$ {price}</Text>
           </View>
         </View>
       </Pressable>
