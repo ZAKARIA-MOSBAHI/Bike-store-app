@@ -14,7 +14,7 @@ export default function ProductHorizontalCard({item}) {
     <>
       <Pressable
         style={styles.container}
-        onPress={() => navigation.navigate('Product', {productId: item.id})}>
+        onPress={() => navigation.push('Product', {productId: item.id})}>
         <ImageBackground
           resizeMode="contain"
           source={CartItemBackground}

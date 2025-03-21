@@ -78,7 +78,7 @@ export default function Footer() {
                   style={styles.footerItem}
                   onPress={() => {
                     setSelectedItem(item.name);
-                    item.route ? navigation.navigate(item.route) : null;
+                    item.route ? navigation.push(item.route) : null;
                   }}>
                   <ImageBackground
                     source={activeBackground}

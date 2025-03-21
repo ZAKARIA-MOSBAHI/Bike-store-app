@@ -15,7 +15,7 @@ export default function SignupScreen() {
 
         <View style={styles.footer}>
           <Text style={styles.footerText}>Already have an account ?</Text>
-          <Pressable onPress={() => navigation.navigate('Login')}>
+          <Pressable onPress={() => navigation.push('Login')}>
             <Text style={styles.footerAction}>Log in</Text>
           </Pressable>
         </View>

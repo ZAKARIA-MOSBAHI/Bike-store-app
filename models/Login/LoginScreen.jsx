@@ -13,7 +13,7 @@ export default function LoginScreen() {
         <LoginInputs />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Don't have an account ?</Text>
-          <Pressable onPress={() => navigation.navigate('Signup')}>
+          <Pressable onPress={() => navigation.push('Signup')}>
             <Text style={styles.footerAction}>Sign up</Text>
           </Pressable>
         </View>

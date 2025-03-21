@@ -150,7 +150,7 @@ const useFormValidation = () => {
         {
           text: 'OK',
           onPress: () => {
-            navigation.navigate('Login', {
+            navigation.push('Login', {
               email: formData.email,
               password: formData.password,
             });
@@ -169,10 +169,7 @@ const useFormValidation = () => {
           text: 'OK',
           onPress: () => {
             setErrors({});
-            navigation.reset({
-              index: 0,
-              routes: [{name: 'Home'}],
-            });
+            navigation.replace('Home');
           },
         },
       ]);

@@ -35,7 +35,7 @@ export default function CheckoutBtn() {
 
     .onChange(e => {
       if (e.translationX > 124) {
-        runOnJS(navigation.navigate)('Checkout');
+        runOnJS(navigation.push)('Checkout');
       }
       if (e.translationX < 0) {
         return;

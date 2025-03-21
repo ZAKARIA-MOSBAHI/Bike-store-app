@@ -45,7 +45,7 @@ export default function Card({styling, product}) {
     <Pressable
       style={styles.card}
       onPress={() => {
-        navigation.navigate('Product', {productId: product.id});
+        navigation.push('Product', {productId: product.id});
       }}>
       <ImageBackground
         source={bg}

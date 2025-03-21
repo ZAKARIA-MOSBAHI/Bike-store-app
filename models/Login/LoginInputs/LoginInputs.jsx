@@ -17,16 +17,7 @@ export default function LoginInputs() {
     password: route.params?.password || '',
   });
   const {errors, handleSubmit} = useFormValidation();
-  // Update formData when route params change
-  useEffect(() => {
-    if (route.params) {
-      setFormData(prev => ({
-        ...prev,
-        email: route.params.email || prev.email,
-        password: route.params.password || prev.password,
-      }));
-    }
-  }, [route.params]);
+
   return (
     <>
       <View style={styles.inputsContainer}>
@@ -84,10 +75,7 @@ export default function LoginInputs() {
           style={[styles.btn, styles.btnOutline]}
           onPress={() => {
             try {
-              navigation.reset({
-                index: 0,
-                routes: [{name: 'Home'}],
-              });
+              navigation.replace('Home');
             } catch (error) {
               console.log(error);
             }
