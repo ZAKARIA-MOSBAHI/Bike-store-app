@@ -4,6 +4,7 @@ import {typography} from '../../../styles/typography';
 export const styles = ScaledSheet.create({
   inputsContainer: {gap: '16@s'},
   input: {
+    color: '#fff',
     borderWidth: 1,
     borderColor: colors.secondary,
     borderRadius: 8,

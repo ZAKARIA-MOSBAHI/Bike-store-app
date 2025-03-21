@@ -5,9 +5,9 @@ import {useNavigation} from '@react-navigation/native';
 
 export default function ProfileScreen() {
   const navigation = useNavigation();
-  const {user} = useAppStore();
+  const {isLoggedIn} = useAppStore();
   useEffect(() => {
-    if (!user.email && !user.password) {
+    if (isLoggedIn === false) {
       navigation.replace('Login');
     }
   }, []);

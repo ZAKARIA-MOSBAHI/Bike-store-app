@@ -1,75 +1,39 @@
-import React, {useState} from 'react';
-import {Alert, Pressable, Text, TextInput, View} from 'react-native';
-
-import {useNavigation} from '@react-navigation/native';
-import {useAppStore} from '../../../store/store';
+import React, {useEffect, useState} from 'react';
+import {Pressable, Text, TextInput, View} from 'react-native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {styles} from './LoginInputsStyle';
 import HidePasswordIcon from '../../../assets/icons/HidePasswordIcon';
 import ShowPasswordIcon from '../../../assets/icons/ShowPasswordIcon';
+import useFormValidation from '../../../hooks/useValidation';
 
 export default function LoginInputs() {
   const navigation = useNavigation();
-
+  const route = useRoute();
   const [showPassword, setShowPassword] = useState(false);
-  const {getUser, resetError} = useAppStore();
+
+  // Initialize formData with route params or empty strings
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: route.params?.email || '',
+    password: route.params?.password || '',
   });
-  const [errors, setErrors] = useState({});
-
-  // Handle form validation
-  const validate = () => {
-    const emailRegex = /\S+@\S+\.\S+/;
-    const {email, password} = formData;
-    const newErrors = {};
-    if (!email) {
-      newErrors.email = 'Email is required';
-    } else if (!emailRegex.test(email)) {
-      newErrors.email = 'Email is invalid';
+  const {errors, handleSubmit} = useFormValidation();
+  // Update formData when route params change
+  useEffect(() => {
+    if (route.params) {
+      setFormData(prev => ({
+        ...prev,
+        email: route.params.email || prev.email,
+        password: route.params.password || prev.password,
+      }));
     }
-    if (!password) {
-      newErrors.password = 'Password is required';
-    } else if (password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
-    }
-
-    return newErrors;
-  };
-
-  const handleSubmit = async () => {
-    setErrors({});
-    await resetError();
-    const formErrors = validate();
-
-    if (Object.keys(formErrors).length === 0) {
-      getUser(formData);
-
-      const {error} = useAppStore.getState();
-
-      if (error) {
-        const errorType = Object.keys(error)[0];
-        setErrors(prev => ({...prev, [errorType]: error[errorType]}));
-      } else {
-        Alert.alert('Connected', 'You are now connected to the application', [
-          {
-            text: 'Cancel',
-            onPress: () => console.log('Cancel Pressed'),
-            style: 'cancel',
-          },
-        ]);
-      }
-    } else {
-      setErrors(formErrors);
-    }
-  };
-
+  }, [route.params]);
   return (
     <>
       <View style={styles.inputsContainer}>
         <View>
           <TextInput
             style={styles.input}
+            value={formData.email}
             placeholder="Email"
             onChangeText={input =>
               setFormData(prev => ({...prev, email: input}))
@@ -81,6 +45,7 @@ export default function LoginInputs() {
           <View style={styles.passwordInputContainer}>
             <TextInput
               style={styles.input}
+              value={formData.password}
               secureTextEntry={showPassword ? false : true}
               placeholder="Password"
               onChangeText={input =>
@@ -112,7 +77,7 @@ export default function LoginInputs() {
       <View style={styles.btnsContainer}>
         <Pressable
           style={[styles.btn, styles.btnPrimary]}
-          onPress={handleSubmit}>
+          onPress={() => handleSubmit(formData)}>
           <Text style={styles.primaryBtnText}>Log in</Text>
         </Pressable>
         <Pressable

@@ -1,82 +1,26 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Alert, Pressable, Text, TextInput, View} from 'react-native';
 import {styles} from './SignupInputsStyle';
 import {useAppStore} from '../../../store/store';
 import {useNavigation} from '@react-navigation/native';
 import HidePasswordIcon from '../../../assets/icons/HidePasswordIcon';
 import ShowPasswordIcon from '../../../assets/icons/ShowPasswordIcon';
+import useFormValidation from '../../../hooks/useValidation';
 
 export default function SignupInputs() {
   const navigation = useNavigation();
-  const [passwordState, setPasswordState] = useState({});
+
   const [showPassword, setShowPassword] = useState({
     password: false,
     confirmPassword: false,
   });
-  const {addUser, resetError} = useAppStore();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     confirmPassword: '',
   });
-  const [errors, setErrors] = useState({});
 
-  const validateEmail = () => {
-    const emailRegex = /\S+@\S+\.\S+/;
-    const {email} = formData;
-    const emailErrors = {};
-    if (email.trim().length === 0) {
-      emailErrors.email = 'Email is required';
-    } else if (!emailRegex.test(email)) {
-      emailErrors.email = 'Email is invalid';
-    }
-    return emailErrors;
-  };
-
-  const validate = () => {
-    const emailRegex = /\S+@\S+\.\S+/;
-    const {email, password, confirmPassword} = formData;
-    const newErrors = {};
-    if (email.trim().length === 0) {
-      newErrors.email = 'Email is required';
-    } else if (!emailRegex.test(email)) {
-      newErrors.email = 'Email is invalid';
-    }
-    if (password.trim().length === 0) {
-      newErrors.password = 'Password is required';
-    } else if (password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
-    }
-    if (confirmPassword.trim().length === 0) {
-      newErrors.confirmPassword = 'Confirmed Password is required';
-    } else if (confirmPassword !== password) {
-      newErrors.confirmPassword =
-        'Confirmed Password should match the password';
-    }
-    return newErrors;
-  };
-
-  const handleSubmit = async () => {
-    setErrors({});
-    await resetError();
-    const formErrors = validate();
-    if (Object.keys(formErrors).length === 0) {
-      const {email, password} = formData;
-      addUser({
-        email: email,
-        password: password,
-      });
-      Alert.alert('Done !', 'Your Account is created you can login now', [
-        {
-          text: 'OK',
-          onPress: () => navigation.navigate('Login'),
-          style: 'OK',
-        },
-      ]);
-    } else {
-      setErrors(formErrors);
-    }
-  };
+  const {errors, handleSubmit, passwordSuccessMessage} = useFormValidation();
 
   return (
     <>
@@ -119,6 +63,9 @@ export default function SignupInputs() {
               </Pressable>
             )}
           </View>
+          {passwordSuccessMessage.length > 0 && (
+            <Text style={{color: 'green'}}>{passwordSuccessMessage}</Text>
+          )}
           {errors.password && (
             <Text style={styles.error}>{errors.password}</Text>
           )}
@@ -159,7 +106,7 @@ export default function SignupInputs() {
       <View style={styles.btnsContainer}>
         <Pressable
           style={[styles.btn, styles.btnPrimary]}
-          onPress={handleSubmit}>
+          onPress={() => handleSubmit(formData, true)}>
           <Text style={styles.primaryBtnText}>Sign up</Text>
         </Pressable>
       </View>

@@ -90,18 +90,24 @@ export const useAppStore = create((set, get) => ({
   getUser: data => {
     const {users} = get();
     let userFound = false;
+    let emailFound = false;
     const error = {};
+
     users.forEach(user => {
       if (user.email === data.email) {
+        emailFound = true;
         if (user.password === data.password) {
           userFound = true;
         } else {
           error.password = 'Password is incorrect';
         }
-      } else {
-        error.email = 'Email is not found';
       }
     });
+
+    if (!emailFound) {
+      error.email = 'Email is not found';
+    }
+
     if (userFound) {
       set({isLoggedIn: true});
       set({user: data});
@@ -109,14 +115,13 @@ export const useAppStore = create((set, get) => ({
       set({error: error});
     }
   },
+
   addUser: data => {
     const {users} = get();
-    try {
+    if ((data?.email, data?.password)) {
       set({user: data, users: [...users, data]});
-      console.log(get());
-      return true;
-    } catch (error) {
-      return error;
+    } else {
+      throw new Error('Email and password are required');
     }
   },
 }));
