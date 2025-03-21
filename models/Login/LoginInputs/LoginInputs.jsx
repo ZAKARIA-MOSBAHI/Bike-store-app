@@ -117,7 +117,12 @@ export default function LoginInputs() {
         </Pressable>
         <Pressable
           style={[styles.btn, styles.btnOutline]}
-          onPress={() => navigation.navigate('Home')}>
+          onPress={() =>
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'Home'}],
+            })
+          }>
           <Text style={styles.outlineBtnText}>Continue as guest</Text>
         </Pressable>
       </View>

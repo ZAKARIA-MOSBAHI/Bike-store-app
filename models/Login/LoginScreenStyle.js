@@ -15,7 +15,7 @@ export const styles = ScaledSheet.create({
     color: '#fff',
   },
 
-  footer: {flexDirection: 'row', gap: '8@s', justifyContent: 'flex-end'},
+  footer: {flexDirection: 'row', gap: '8@s', justifyContent: 'center'},
   footerText: {...typography.p, color: '#fff', textAlign: 'right'},
   footerAction: {
     ...typography.p,

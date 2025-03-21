@@ -10,7 +10,7 @@ export default function CardsList() {
   const {filteredProducts, filterProducts} = useProductStore();
   useEffect(() => {
     filterProducts('All');
-  }, []);
+  }, [filterProducts]);
   return (
     <FlatList
       contentContainerStyle={styles.listContentStyle}

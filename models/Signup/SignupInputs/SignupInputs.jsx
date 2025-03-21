@@ -8,7 +8,7 @@ import ShowPasswordIcon from '../../../assets/icons/ShowPasswordIcon';
 
 export default function SignupInputs() {
   const navigation = useNavigation();
-
+  const [passwordState, setPasswordState] = useState({});
   const [showPassword, setShowPassword] = useState({
     password: false,
     confirmPassword: false,
@@ -20,6 +20,18 @@ export default function SignupInputs() {
     confirmPassword: '',
   });
   const [errors, setErrors] = useState({});
+
+  const validateEmail = () => {
+    const emailRegex = /\S+@\S+\.\S+/;
+    const {email} = formData;
+    const emailErrors = {};
+    if (email.trim().length === 0) {
+      emailErrors.email = 'Email is required';
+    } else if (!emailRegex.test(email)) {
+      emailErrors.email = 'Email is invalid';
+    }
+    return emailErrors;
+  };
 
   const validate = () => {
     const emailRegex = /\S+@\S+\.\S+/;
