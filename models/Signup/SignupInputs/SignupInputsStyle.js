@@ -27,16 +27,6 @@ export const styles = ScaledSheet.create({
     fontWeight: 'medium',
     textAlign: 'center',
   },
-  btnOutline: {
-    borderColor: colors.secondary,
-    borderWidth: 1,
-  },
-  outlineBtnText: {
-    color: colors.secondary,
-    fontWeight: 'medium',
-    textAlign: 'center',
-    ...typography.h3,
-  },
   error: {
     color: '#E3242B',
     margin: '8@s',

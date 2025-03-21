@@ -6,7 +6,6 @@ import {typography} from '../../../../styles/typography';
 import Categories from '../Categories/Categories';
 
 export default function SearchView({filteredList, filter}) {
-  console.log(filteredList);
   return (
     <KeyboardAvoidingView style={styles.container}>
       <Categories

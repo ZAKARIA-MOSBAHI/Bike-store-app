@@ -57,7 +57,7 @@ export default function SignupInputs() {
       Alert.alert('Done !', 'Your Account is created you can login now', [
         {
           text: 'OK',
-          onPress: () => navigation.navigate('Home'),
+          onPress: () => navigation.navigate('Login'),
           style: 'OK',
         },
       ]);
@@ -149,11 +149,6 @@ export default function SignupInputs() {
           style={[styles.btn, styles.btnPrimary]}
           onPress={handleSubmit}>
           <Text style={styles.primaryBtnText}>Sign up</Text>
-        </Pressable>
-        <Pressable
-          style={[styles.btn, styles.btnOutline]}
-          onPress={() => navigation.navigate('Home')}>
-          <Text style={styles.outlineBtnText}>Continue as guest</Text>
         </Pressable>
       </View>
     </>
