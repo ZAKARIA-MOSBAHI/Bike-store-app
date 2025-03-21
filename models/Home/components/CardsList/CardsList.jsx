@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {FlatList, Text, View} from 'react-native';
 import {styles} from './CardsListStyle';
 import Card from '../Card/Card';
@@ -7,7 +7,10 @@ import {typography} from '../../../../styles/typography';
 import {colors} from '../../../../styles/colors';
 
 export default function CardsList() {
-  const {filteredProducts} = useProductStore();
+  const {filteredProducts, filterProducts} = useProductStore();
+  useEffect(() => {
+    filterProducts('All');
+  }, []);
   return (
     <FlatList
       contentContainerStyle={styles.listContentStyle}

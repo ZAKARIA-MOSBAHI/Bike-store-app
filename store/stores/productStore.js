@@ -88,7 +88,6 @@ export const useProductStore = create(set => ({
   filteredProducts: [],
   filterProducts: category => {
     set(state => {
-      console.log(category);
       if (category === 'All') {
         return {...state, filteredProducts: state.products};
       } else {
