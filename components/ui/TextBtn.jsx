@@ -4,13 +4,7 @@ import {scale, verticalScale} from 'react-native-size-matters';
 import LinearGradient from 'react-native-linear-gradient';
 import {colors} from '../../styles/colors';
 
-export default function TextBtn({
-  style,
-  children,
-  onPress,
-  variant,
-  gradient = true,
-}) {
+export default function TextBtn({style, children, onPress, gradient = true}) {
   return (
     <Pressable onPress={onPress}>
       {gradient && (

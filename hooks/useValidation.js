@@ -146,33 +146,23 @@ const useFormValidation = () => {
 
     if (isSignup) {
       addUser({email: formData.email, password: formData.password});
-      return Alert.alert('Success', 'Account created successfully !', [
-        {
-          text: 'OK',
-          onPress: () => {
-            navigation.push('Login', {
-              email: formData.email,
-              password: formData.password,
-            });
-          },
-        },
-      ]);
+
+      navigation.push('Login', {
+        email: formData.email,
+        password: formData.password,
+      });
     } else {
     }
     await getUser(formData);
+
+    // getting the error state here to get the newer version
     const {error} = useAppStore.getState();
     if (error) {
       setErrors(prev => ({...prev, ...error}));
     } else {
-      Alert.alert('Success', 'You are now  logged in', [
-        {
-          text: 'OK',
-          onPress: () => {
-            setErrors({});
-            navigation.replace('Home');
-          },
-        },
-      ]);
+      setErrors({});
+      navigation.replace('Home');
+
       // persisting data ...
     }
   };

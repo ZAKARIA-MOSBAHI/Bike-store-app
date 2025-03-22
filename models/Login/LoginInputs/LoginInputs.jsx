@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Pressable, Text, TextInput, View} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {styles} from './LoginInputsStyle';

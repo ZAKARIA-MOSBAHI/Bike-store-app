@@ -1,20 +1,24 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Pressable, Text} from 'react-native';
 
-export default function Tab({title, style}) {
+export default function Tab({item, style}) {
+  const IconComponent = item.icon;
   return (
-    <View
+    <Pressable
       style={[
         {
-          paddingVertical: 24,
+          gap: 16,
+          paddingVertical: 16,
           paddingHorizontal: 16,
-
+          flexDirection: 'row',
+          alignItems: 'center',
           borderBottomColor: 'gray',
           borderBottomWidth: 1,
         },
         style,
       ]}>
-      <Text style={{fontSize: 20, color: 'white'}}>{title}</Text>
-    </View>
+      <IconComponent width={36} height={36} />
+      <Text style={{fontSize: 20, color: 'white'}}>{item.name}</Text>
+    </Pressable>
   );
 }

@@ -2,13 +2,18 @@ import React from 'react';
 import {scale} from 'react-native-size-matters';
 import Svg, {Defs, LinearGradient, Path, Stop} from 'react-native-svg';
 
-export default function HeartIcon({style, isFavorite}) {
+export default function HeartIcon({
+  width = 24,
+  height = 24,
+  style,
+  isFavorite,
+}) {
   return (
     <Svg
       style={style}
-      width={scale(24)}
-      height={scale(24)}
-      viewBox="0 0 21 18"
+      width={scale(width)}
+      height={scale(height)}
+      viewBox="0 0 24 18"
       fill="none"
       xmlns="http://www.w3.org/2000/svg">
       <Defs>
