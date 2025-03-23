@@ -15,6 +15,7 @@ export default function CardsList() {
   }, [filterProducts]);
   return (
     <FlatList
+      removeClippedSubviews={false}
       contentContainerStyle={styles.listContentStyle}
       style={styles.listStyle}
       numColumns={2}

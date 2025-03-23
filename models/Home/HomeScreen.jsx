@@ -1,5 +1,5 @@
-import React from 'react';
-import {ImageBackground, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {BackHandler, ImageBackground, View} from 'react-native';
 import {styles} from './HomeScreenStyle';
 import Footer from '../../components/Footer/Footer';
 import CardsList from './components/CardsList/CardsList';
@@ -18,6 +18,19 @@ export default function HomeScreen() {
     filteredProducts,
     filterSearchResults,
   } = useSearch(products);
+  // HIDE SEARCH VIEW IF OPENED USING BACK HANDLER
+  useEffect(() => {
+    const removeSearchView = BackHandler.addEventListener(
+      'hardwareBackPress',
+      () => {
+        if (isActive) {
+          setIsActive(false);
+          return true;
+        }
+      },
+    );
+    return () => removeSearchView.remove();
+  }, [isActive, setIsActive]);
 
   return (
     <>

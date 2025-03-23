@@ -75,7 +75,7 @@ export default function LoginInputs() {
           style={[styles.btn, styles.btnOutline]}
           onPress={() => {
             try {
-              navigation.replace('Home');
+              navigation.push('Home');
             } catch (error) {
               console.log(error);
             }

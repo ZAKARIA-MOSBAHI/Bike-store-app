@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Alert, FlatList, Text, View} from 'react-native';
+import {FlatList, View} from 'react-native';
 import {useAppStore} from '../../store/store';
 import {useNavigation} from '@react-navigation/native';
 import {styles} from './ProfileScreenStyle';
@@ -13,33 +13,18 @@ import PaymentMethodIcon from '../../assets/icons/PaymentMethodIcon';
 import NotificationIcon from '../../assets/icons/NotificationIcon';
 import HelpIcon from '../../assets/icons/HelpIcon';
 import AboutIcon from '../../assets/icons/AboutIcon';
-import TextBtn from '../../components/ui/TextBtn';
+import ProfileFooter from './ProfileFooter/ProfileFooter';
 
 export default function ProfileScreen() {
   const navigation = useNavigation();
   const {isLoggedIn} = useAppStore();
-  const handleLogout = () => {
-    Alert.alert('Logout', 'Are you sure to logout ?', [
-      {
-        text: 'Logout',
-        onPress: () => {
-          console.log('navigate');
-        },
-      },
-      {
-        text: 'Cancel',
-        onPress: () => {
-          console.log('navigate');
-        },
-        style: 'cancel',
-      },
-    ]);
-  };
+
   useEffect(() => {
     if (isLoggedIn === false) {
       navigation.replace('Login');
     }
-  }, []);
+  }, [isLoggedIn]);
+
   const Tabs = [
     {
       name: 'Orders',
@@ -48,6 +33,7 @@ export default function ProfileScreen() {
     {
       name: 'Favorites',
       icon: HeartIcon,
+      route: 'Favorites',
     },
     {
       name: 'My Details',
@@ -75,15 +61,14 @@ export default function ProfileScreen() {
       icon: AboutIcon,
     },
   ];
+
   return (
     <View style={styles.container}>
       <FlatList
+        removeClippedSubviews={false}
+        keyExtractor={(item, index) => item.name + index}
         ListHeaderComponent={<ProfileHeader />}
-        ListFooterComponent={
-          <TextBtn style={styles.btn} onPress={handleLogout}>
-            <Text style={styles.btnText}>Log out</Text>
-          </TextBtn>
-        }
+        ListFooterComponent={<ProfileFooter />}
         data={Tabs}
         renderItem={({item, index}) => (
           <Tab

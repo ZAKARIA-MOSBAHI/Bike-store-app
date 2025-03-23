@@ -1,6 +1,5 @@
 import React from 'react';
 import {Image, Text, View} from 'react-native';
-import {typography} from '../../../styles/typography';
 import {useAppStore} from '../../../store/store';
 import {styles} from './ProfileHeaderStyle';
 
@@ -18,7 +17,7 @@ export default function ProfileHeader() {
       </View>
       <View>
         <Text style={styles.userName}>Zakaria</Text>
-        <Text style={styles.userEmail}>{user.email}</Text>
+        <Text style={styles.userEmail}>{user ? user.email : ''}</Text>
       </View>
     </View>
   );

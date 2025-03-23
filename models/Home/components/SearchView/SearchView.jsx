@@ -19,6 +19,7 @@ export default function SearchView({filteredList, filter}) {
         }}
       />
       <FlatList
+        removeClippedSubviews={false}
         data={filteredList}
         renderItem={({item}) => <ProductHorizontalCard item={item} />}
         keyExtractor={item => item.id}

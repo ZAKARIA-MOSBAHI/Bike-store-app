@@ -10,4 +10,5 @@ export const useFavoriteStore = create(set => ({
     set(state => ({
       favorites: state.favorites.filter(f => f.id !== payload.id),
     })),
+  resetFavorites: () => set({favorites: []}),
 }));

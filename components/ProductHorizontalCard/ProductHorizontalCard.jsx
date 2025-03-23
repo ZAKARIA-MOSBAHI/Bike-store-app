@@ -2,12 +2,15 @@ import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {Image, ImageBackground, Pressable, Text, View} from 'react-native';
 import {styles} from './ProductHorizontalCardStyle';
-import {typography} from '../../styles/typography';
-import {colors} from '../../styles/colors';
+import CloseIcon from '../../assets/icons/CloseIcon';
 
 const CartItemBackground = require('../../assets/images/cart-item-background.png');
 
-export default function ProductHorizontalCard({item}) {
+export default function ProductHorizontalCard({
+  item,
+  withCloseBtn = false,
+  onCloseBtnClick,
+}) {
   const navigation = useNavigation();
   const {img, name, price, description} = item;
   return (
@@ -31,6 +34,11 @@ export default function ProductHorizontalCard({item}) {
             <Text style={styles.productPrice}>$ {price}</Text>
           </View>
         </View>
+        {withCloseBtn && (
+          <Pressable onPress={onCloseBtnClick} style={styles.closeBtn}>
+            <CloseIcon />
+          </Pressable>
+        )}
       </Pressable>
       <View style={styles.cartDivider} />
     </>

@@ -11,25 +11,25 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 
 const footerMenu = [
   {
-    name: 'home',
+    name: 'Home',
     icon: BicycleIcon,
     route: 'Home',
   },
   {
-    name: 'map',
+    name: 'Map',
     icon: MapIcon,
   },
   {
-    name: 'cart',
+    name: 'Cart',
     icon: CartIcon,
     route: 'Cart',
   },
   {
-    name: 'document',
+    name: 'Document',
     icon: DocumentIcon,
   },
   {
-    name: 'profile',
+    name: 'Profile',
     icon: PersonIcon,
     route: 'Profile',
   },
@@ -40,7 +40,7 @@ export default function Footer() {
   const [selectedItem, setSelectedItem] = useState('home');
   const [keyboardVisible, setKeyboardVisible] = useState(false);
   const navigation = useNavigation();
-
+  const route = useRoute();
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
@@ -54,11 +54,17 @@ export default function Footer() {
         setKeyboardVisible(false);
       },
     );
+    console.log('route.name  ', route.name);
     return () => {
       keyboardDidShowListener.remove();
       keyboardDidHideListener.remove();
     };
   }, []);
+  useEffect(() => {
+    const currentPage = route.name;
+    console.log('route.name  ', route.name); // this logs too many times
+    setSelectedItem(currentPage);
+  }, [route]);
 
   return (
     <>

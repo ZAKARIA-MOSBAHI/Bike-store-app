@@ -8,6 +8,7 @@ export const styles = ScaledSheet.create({
     gap: '16@s',
     paddingInline: '10@s',
     paddingBlock: '30@vs',
+    position: 'relative',
   },
   productBgImage: {width: '90@s', height: '100@vs', justifySelf: 'center'},
   productImg: {width: '90%', height: '100%', marginInline: 'auto'},
@@ -30,5 +31,10 @@ export const styles = ScaledSheet.create({
     height: '0.5@vs',
     backgroundColor: colors.gray,
     opacity: 0.3,
+  },
+  closeBtn: {
+    position: 'relative',
+    top: '5@vs',
+    right: '10@s',
   },
 });

@@ -124,4 +124,13 @@ export const useAppStore = create((set, get) => ({
       throw new Error('Email and password are required');
     }
   },
+  resetUser: () => {
+    set({
+      user: {
+        email: null,
+        password: null,
+      },
+      isLoggedIn: false,
+    });
+  },
 }));

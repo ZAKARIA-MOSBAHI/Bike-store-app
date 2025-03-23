@@ -161,7 +161,12 @@ const useFormValidation = () => {
       setErrors(prev => ({...prev, ...error}));
     } else {
       setErrors({});
-      navigation.replace('Home');
+      // resetting the navigation , so that the user start a new navigation when login in
+      // to not let the back handler to go back to the previous page (before he logged in)
+      navigation.reset({
+        index: 0,
+        routes: [{name: 'Home'}],
+      });
 
       // persisting data ...
     }

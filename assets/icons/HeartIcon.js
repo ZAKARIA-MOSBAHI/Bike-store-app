@@ -1,10 +1,11 @@
 import React from 'react';
 import {scale} from 'react-native-size-matters';
 import Svg, {Defs, LinearGradient, Path, Stop} from 'react-native-svg';
+import {colors} from '../../styles/colors';
 
 export default function HeartIcon({
-  width = 24,
-  height = 24,
+  width = 26,
+  height = 26,
   style,
   isFavorite,
 }) {

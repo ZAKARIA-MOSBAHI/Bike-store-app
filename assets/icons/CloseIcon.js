@@ -1,11 +1,12 @@
 import React from 'react';
 import Svg, {Path} from 'react-native-svg';
 
-export default function CloseIcon() {
+export default function CloseIcon({style, height = 20, width = 20}) {
   return (
     <Svg
-      width="20"
-      height="20"
+      width={width}
+      style={style}
+      height={height}
       viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg">
