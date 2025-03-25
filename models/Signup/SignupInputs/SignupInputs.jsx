@@ -12,12 +12,11 @@ import {openCamera} from '../../../utils/openCamera';
 import {openImageGallery} from '../../../utils/openGallery';
 
 export default function SignupInputs() {
-  const {user, setUser, users} = useAppStore();
+  const {user, users} = useAppStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [uploadStatus, setUploadStatus] = useState(
     'Upload Your Profile Picture',
   );
-  const navigation = useNavigation();
 
   const [showPassword, setShowPassword] = useState({
     password: false,
@@ -77,6 +76,7 @@ export default function SignupInputs() {
           <UploadIcon width={40} height={40} />
           <Text style={styles.imageInputText}>{uploadStatus}</Text>
         </Pressable>
+
         <View>
           <TextInput
             style={styles.input}

@@ -7,10 +7,41 @@ export const styles = ScaledSheet.create({
     backgroundColor: colors.background,
     flex: 1,
   },
-  title: {
-    ...typography.h1,
+  actionsContainer: {
+    paddingTop: '80@vs',
+    paddingHorizontal: '24@s',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  textContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  text: {
+    ...typography.p,
+    textDecorationLine: 'underline',
     color: colors.secondary,
-    paddingHorizontal: '20@s',
-    paddingTop: '24@s',
+  },
+  deleteText: {
+    ...typography.p,
+    textDecorationLine: 'underline',
+    color: 'red',
+    alignSelf: 'flex-end',
+  },
+  ctaContainer: {
+    marginVertical: '15@vs',
+    alignSelf: 'center',
+    paddingVertical: '12@vs',
+    paddingHorizontal: '24@s',
+    borderRadius: 9,
+    alignItems: 'center',
+    justifyContent: 'center',
+    mixBlendMode: 'screen',
+  },
+  cta: {
+    ...typography.p,
+    color: '#fff',
+    fontWeight: 'bold',
   },
 });

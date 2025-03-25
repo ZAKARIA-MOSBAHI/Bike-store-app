@@ -1,12 +1,13 @@
 import React from 'react';
 import {Image} from 'react-native';
 import {ScaledSheet} from 'react-native-size-matters/extend';
+const productImg = require('../../../../assets/images/bicycle2-lg.png');
 
 export default function ProductImage({product}) {
   return (
     <Image
       resizeMode={'contain'}
-      source={product.largeImage}
+      source={productImg}
       style={styles.productImage}
     />
   );

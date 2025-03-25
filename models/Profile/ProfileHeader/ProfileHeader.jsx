@@ -6,6 +6,7 @@ import CameraIcon from '../../../assets/icons/CameraIcon';
 import UploadPictureModal from '../../../components/UploadPictureModal/UploadPictureModal';
 import {openCamera} from '../../../utils/openCamera';
 import {openImageGallery} from '../../../utils/openGallery';
+import PenIcon from '../../../assets/icons/PenIcon';
 const profileImage = require('../../../assets/images/user-avatar.jpg');
 export default function ProfileHeader() {
   const {user, setUser} = useAppStore();
@@ -44,8 +45,8 @@ export default function ProfileHeader() {
   };
   useEffect(() => {
     setSelectedImage(user.image);
-  }, []);
-  console.log(user);
+  }, [user]);
+
   return (
     <View style={styles.container}>
       <Pressable onPress={openModal} style={styles.subContainer}>
@@ -58,9 +59,14 @@ export default function ProfileHeader() {
           <CameraIcon />
         </View>
       </Pressable>
-      <View>
+      <View style={styles.userInfos}>
         <Text style={styles.userName}>Zakaria</Text>
         <Text style={styles.userEmail}>{user ? user.email : ''}</Text>
+        <Pressable
+          style={styles.penIcon}
+          onPress={() => console.log('pen clicked')}>
+          <PenIcon width={24} height={24} />
+        </Pressable>
       </View>
       <UploadPictureModal
         onCameraClick={handleCameraClick}

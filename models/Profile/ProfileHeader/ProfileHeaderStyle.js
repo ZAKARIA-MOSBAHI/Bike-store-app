@@ -24,6 +24,14 @@ export const styles = ScaledSheet.create({
     padding: 4,
     right: -5,
   },
+  userInfos: {
+    position: 'relative',
+  },
   userName: {color: 'white', ...typography.h2},
   userEmail: {color: colors.gray, ...typography.p},
+  penIcon: {
+    position: 'absolute',
+    right: 0,
+    top: '5@s',
+  },
 });
