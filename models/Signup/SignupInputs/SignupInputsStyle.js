@@ -13,6 +13,19 @@ export const styles = ScaledSheet.create({
     paddingLeft: '16@s',
     fontSize: '16@s',
   },
+  imageInputContainer: {
+    paddingVertical: '10@vs',
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: colors.secondary,
+    borderStyle: 'dashed',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  imageInputText: {
+    fontSize: '16@s',
+    color: colors.gray,
+  },
   passwordInputContainer: {
     position: 'relative',
   },

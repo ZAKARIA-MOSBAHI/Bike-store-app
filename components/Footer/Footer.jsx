@@ -54,7 +54,7 @@ export default function Footer() {
         setKeyboardVisible(false);
       },
     );
-    console.log('route.name  ', route.name);
+    // console.log('route.name  ', route.name);
     return () => {
       keyboardDidShowListener.remove();
       keyboardDidHideListener.remove();
@@ -62,7 +62,7 @@ export default function Footer() {
   }, []);
   useEffect(() => {
     const currentPage = route.name;
-    console.log('route.name  ', route.name); // this logs too many times
+    // console.log('route.name  ', route.name); // this logs too many times
     setSelectedItem(currentPage);
   }, [route]);
 

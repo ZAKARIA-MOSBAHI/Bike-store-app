@@ -6,8 +6,17 @@ import {useNavigation} from '@react-navigation/native';
 import HidePasswordIcon from '../../../assets/icons/HidePasswordIcon';
 import ShowPasswordIcon from '../../../assets/icons/ShowPasswordIcon';
 import useFormValidation from '../../../hooks/useValidation';
+import UploadIcon from '../../../assets/icons/UploadIcon';
+import UploadPictureModal from '../../../components/UploadPictureModal/UploadPictureModal';
+import {openCamera} from '../../../utils/openCamera';
+import {openImageGallery} from '../../../utils/openGallery';
 
 export default function SignupInputs() {
+  const {user, setUser, users} = useAppStore();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [uploadStatus, setUploadStatus] = useState(
+    'Upload Your Profile Picture',
+  );
   const navigation = useNavigation();
 
   const [showPassword, setShowPassword] = useState({
@@ -15,16 +24,59 @@ export default function SignupInputs() {
     confirmPassword: false,
   });
   const [formData, setFormData] = useState({
+    image: '',
     email: '',
     password: '',
     confirmPassword: '',
   });
-
   const {errors, handleSubmit, passwordSuccessMessage} = useFormValidation();
+  const handleCameraClick = async () => {
+    try {
+      const image = await openCamera();
+      if (image) {
+        setUploadStatus('Image Uploaded Sucessfully');
+        setFormData(prev => ({...prev, image: image}));
+        setIsModalVisible(false);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const handleGalleryClick = async () => {
+    try {
+      const image = await openImageGallery();
+      if (image) {
+        setUploadStatus('Image Uploaded Sucessfully');
+        setFormData(prev => ({...prev, image: image}));
+        setIsModalVisible(false);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const handleTrashClick = () => {
+    setUploadStatus('Upload Your Profile Picture');
+    setFormData(prev => ({...prev, image: null}));
+    setIsModalVisible(false);
+  };
+
+  useEffect(() => {
+    console.info(user);
+  }, [user]);
+  useEffect(() => {
+    console.log('users are modified');
+    console.log(users);
+  }, [users]);
 
   return (
     <>
       <View style={styles.inputsContainer}>
+        <Pressable
+          style={styles.imageInputContainer}
+          onPress={() => setIsModalVisible(true)}>
+          <UploadIcon width={40} height={40} />
+          <Text style={styles.imageInputText}>{uploadStatus}</Text>
+        </Pressable>
         <View>
           <TextInput
             style={styles.input}
@@ -110,6 +162,13 @@ export default function SignupInputs() {
           <Text style={styles.primaryBtnText}>Sign up</Text>
         </Pressable>
       </View>
+      <UploadPictureModal
+        onTrashClick={handleTrashClick}
+        onGalleryClick={handleGalleryClick}
+        onCameraClick={handleCameraClick}
+        setIsModalVisible={setIsModalVisible}
+        isModalVisible={isModalVisible}
+      />
     </>
   );
 }

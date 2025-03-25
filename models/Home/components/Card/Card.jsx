@@ -9,6 +9,7 @@ import {useAppStore} from '../../../../store/store';
 import {useFavoriteStore} from '../../../../store/stores/favoriteStore';
 
 const bg = require('../../../../assets/images/card.png');
+const cardimg = require('../../../../assets/images/bicycle2.png');
 export default function Card({styling, product}) {
   const {cart, incrementQuantity, decrementQuantity, addToCart} = useAppStore();
   const {addFavorite, favorites, removeFavorite} = useFavoriteStore();
@@ -52,16 +53,18 @@ export default function Card({styling, product}) {
         resizeMode="stretch"
         style={[styles.background, styling]}>
         <View style={styles.productImageContainer}>
-          <Image source={product.img} style={styles.productImage} />
+          <Image source={cardimg} style={styles.productImage} />
           <Pressable onPress={handleFavorite} style={styles.heartBtn}>
             <HeartIcon isFavorite={isFavorite} />
           </Pressable>
         </View>
         <View style={[styles.cardinfo]}>
           <Text style={[styles.category, typography.h4]}>
-            {product.category}
+            {product.category.name}
           </Text>
-          <Text style={[styles.name, typography.p]}>{product.name}</Text>
+          <Text style={[styles.name, typography.p]} numberOfLines={1}>
+            {product.title}
+          </Text>
 
           <View style={styles.quantityCounterContainer}>
             <Text style={[styles.price, typography.h4]}>$ {product.price}</Text>

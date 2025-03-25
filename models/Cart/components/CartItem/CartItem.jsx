@@ -6,10 +6,10 @@ import {useAppStore} from '../../../../store/store';
 import QuantityCounter from '../../../../components/QuantityCounter/QuantityCounter';
 import {scale} from 'react-native-size-matters/extend';
 const CartItemBackground = require('../../../../assets/images/cart-item-background.png');
-
+const cartItemImg = require('../../../../assets/images/bicycle2.png');
 export default function CartItem({item}) {
   const {incrementQuantity, decrementQuantity} = useAppStore();
-  const {img, name, price, quantity} = item;
+  const {quantity} = item;
   return (
     <>
       <View style={styles.container}>
@@ -17,12 +17,20 @@ export default function CartItem({item}) {
           resizeMode="contain"
           source={CartItemBackground}
           style={styles.productBgImage}>
-          <Image source={img} style={styles.productImg} resizeMode="contain" />
+          <Image
+            source={cartItemImg}
+            style={styles.productImg}
+            resizeMode="contain"
+          />
         </ImageBackground>
         <View style={styles.itemInfoContainer}>
-          <Text style={([typography.h3], styles.productName)}>{name}</Text>
+          <Text style={([typography.h3], styles.productName)}>
+            {item.title}
+          </Text>
           <View style={styles.priceContainer}>
-            <Text style={([typography.p], styles.productPrice)}>$ {price}</Text>
+            <Text style={([typography.p], styles.productPrice)}>
+              $ {item.price}
+            </Text>
 
             <QuantityCounter
               containerStyle={{borderRadius: scale(8)}}

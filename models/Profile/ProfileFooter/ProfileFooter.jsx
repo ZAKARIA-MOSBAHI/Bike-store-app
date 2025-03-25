@@ -9,7 +9,7 @@ import {useAppStore} from '../../../store/store';
 import {useFavoriteStore} from '../../../store/stores/favoriteStore';
 
 export default function ProfileFooter() {
-  const {resetUser, user} = useAppStore();
+  const {resetUser} = useAppStore();
   const {resetFavorites} = useFavoriteStore();
   const navigation = useNavigation();
   const handleLogout = () => {
@@ -28,7 +28,6 @@ export default function ProfileFooter() {
       },
     ]);
   };
-  console.log(user);
   return (
     <TextBtn style={styles.btn} onPress={handleLogout}>
       <LogoutIcon />

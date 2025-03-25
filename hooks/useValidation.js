@@ -1,6 +1,5 @@
 import {useState} from 'react';
 import {useAppStore} from '../store/store';
-import {Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -145,14 +144,19 @@ const useFormValidation = () => {
     }
 
     if (isSignup) {
-      addUser({email: formData.email, password: formData.password});
+      addUser({
+        image: formData.image,
+        email: formData.email,
+        password: formData.password,
+      });
 
       navigation.push('Login', {
         email: formData.email,
         password: formData.password,
       });
-    } else {
+      return;
     }
+    console.info('form data ', formData);
     await getUser(formData);
 
     // getting the error state here to get the newer version

@@ -5,8 +5,8 @@ import Footer from '../../components/Footer/Footer';
 import CardsList from './components/CardsList/CardsList';
 import SearchHeader from '../../components/SearchHeader/SearchHeader';
 import SearchView from './components/SearchView/SearchView';
-import {useProductStore} from '../../store/stores/productStore';
 import useSearch from '../../hooks/useSearch';
+import {useProductStore} from '../../store/stores/productStore';
 const background = require('../../assets/images/Background.png');
 export default function HomeScreen() {
   const {products} = useProductStore();

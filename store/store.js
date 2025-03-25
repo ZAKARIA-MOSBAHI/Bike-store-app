@@ -3,12 +3,14 @@ import {create} from 'zustand';
 export const useAppStore = create((set, get) => ({
   users: [
     {
+      image: '',
       email: 'user@example.com',
       password: '123456789',
     },
-    {email: 'user2@example.com', password: 'password2'},
+    {image: '', email: 'user2@example.com', password: 'password2'},
   ],
   user: {
+    image: '',
     email: null,
     password: null,
   },
@@ -92,12 +94,13 @@ export const useAppStore = create((set, get) => ({
     let userFound = false;
     let emailFound = false;
     const error = {};
-
+    let userLogging = false;
     users.forEach(user => {
       if (user.email === data.email) {
         emailFound = true;
         if (user.password === data.password) {
           userFound = true;
+          userLogging = user;
         } else {
           error.password = 'Password is incorrect';
         }
@@ -110,7 +113,8 @@ export const useAppStore = create((set, get) => ({
 
     if (userFound) {
       set({isLoggedIn: true});
-      set({user: data});
+      console.log('data ', data);
+      set({user: userLogging});
     } else {
       set({error: error});
     }
@@ -132,5 +136,12 @@ export const useAppStore = create((set, get) => ({
       },
       isLoggedIn: false,
     });
+  },
+  setUser: (payload, property) => {
+    const {users, user} = get();
+    const userToSet = users.find(u => user.email === u.email);
+    const newUsers = users.filter(u => u.email !== user.email);
+    const newUser = {...userToSet, [property]: payload};
+    set(state => ({...state, users: [...newUsers, newUser], user: newUser}));
   },
 }));

@@ -5,14 +5,13 @@ import {styles} from './ProductHorizontalCardStyle';
 import CloseIcon from '../../assets/icons/CloseIcon';
 
 const CartItemBackground = require('../../assets/images/cart-item-background.png');
-
+const cardimg = require('../../assets/images/bicycle2.png');
 export default function ProductHorizontalCard({
   item,
   withCloseBtn = false,
   onCloseBtnClick,
 }) {
   const navigation = useNavigation();
-  const {img, name, price, description} = item;
   return (
     <>
       <Pressable
@@ -22,16 +21,20 @@ export default function ProductHorizontalCard({
           resizeMode="contain"
           source={CartItemBackground}
           style={styles.productBgImage}>
-          <Image source={img} style={styles.productImg} resizeMode="contain" />
+          <Image
+            source={cardimg}
+            style={styles.productImg}
+            resizeMode="contain"
+          />
         </ImageBackground>
         <View style={styles.itemInfoContainer}>
-          <Text style={styles.productName}>{name}</Text>
+          <Text style={styles.productName}>{item.title}</Text>
           <Text style={styles.productDescription} numberOfLines={2}>
-            {description}
+            {item.description}
           </Text>
 
           <View style={styles.priceContainer}>
-            <Text style={styles.productPrice}>$ {price}</Text>
+            <Text style={styles.productPrice}>$ {item.price}</Text>
           </View>
         </View>
         {withCloseBtn && (

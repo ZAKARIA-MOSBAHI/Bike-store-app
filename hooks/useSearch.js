@@ -14,7 +14,9 @@ export default function useSearch(products) {
       return searchResult;
     }
     return searchResult.filter(product =>
-      product.category.toLowerCase().includes(selectedCategory.toLowerCase()),
+      product.category.name
+        .toLowerCase()
+        .includes(selectedCategory.toLowerCase()),
     );
   }, [searchResult, selectedCategory]);
 
@@ -30,7 +32,9 @@ export default function useSearch(products) {
     } else {
       // Filter by search query
       const result = products.filter(product =>
-        product.name.toLowerCase().includes(debouncedSearchQuery.toLowerCase()),
+        product.title
+          .toLowerCase()
+          .includes(debouncedSearchQuery.toLowerCase()),
       );
       setSearchResult(result);
     }

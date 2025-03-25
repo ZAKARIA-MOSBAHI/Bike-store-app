@@ -25,8 +25,8 @@ export default function Tab({item, style}) {
         },
         style,
       ]}>
-      <IconComponent width={36} height={36} />
-      <Text style={{fontSize: 20, color: 'white'}}>{item.name}</Text>
+      <IconComponent width={34} height={34} />
+      <Text style={{fontSize: 18, color: 'white'}}>{item.name}</Text>
     </Pressable>
   );
 }
