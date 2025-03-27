@@ -60,7 +60,7 @@ export default function ProfileHeader() {
         </View>
       </Pressable>
       <View style={styles.userInfos}>
-        <Text style={styles.userName}>Zakaria</Text>
+        <Text style={styles.userName}>{user ? user.name : 'User'}</Text>
         <Text style={styles.userEmail}>{user ? user.email : ''}</Text>
         <Pressable
           style={styles.penIcon}

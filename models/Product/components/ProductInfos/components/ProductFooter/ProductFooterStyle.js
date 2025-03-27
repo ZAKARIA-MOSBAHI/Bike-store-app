@@ -3,15 +3,15 @@ import {ScaledSheet} from 'react-native-size-matters/extend';
 export const styles = ScaledSheet.create({
   footerContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    gap: '32@s',
+    paddingHorizontal: '40@s',
     borderTopRightRadius: 50,
     borderTopLeftRadius: 50,
     backgroundColor: '#262E3D',
     width: '100%',
     paddingBlock: '32@vs',
-    marginBlock: '40@vs',
+    marginBlock: '30@vs',
     elevation: 100,
     borderWidth: 2,
     borderColor: '#29212125',

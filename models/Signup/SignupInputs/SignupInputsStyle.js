@@ -24,7 +24,6 @@ export const styles = ScaledSheet.create({
   },
   imageInputText: {
     fontSize: '16@s',
-    color: colors.gray,
   },
   passwordInputContainer: {
     position: 'relative',

@@ -8,6 +8,7 @@ import PersonIcon from '../../assets/icons/PersonIcon';
 import DocumentIcon from '../../assets/icons/DocumentIcon';
 import {colors} from '../../styles/colors';
 import {useNavigation, useRoute} from '@react-navigation/native';
+import CartBadge from '../CartBadge/CartBadge';
 
 const footerMenu = [
   {
@@ -95,6 +96,7 @@ export default function Footer() {
                     ]}
                     resizeMode="cover"
                   />
+                  {item.name === 'Cart' ? <CartBadge /> : null}
                   <item.icon
                     style={[
                       styles.footerIcon,

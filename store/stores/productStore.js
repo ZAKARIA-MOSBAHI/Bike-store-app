@@ -6,6 +6,11 @@ export const useProductStore = create((set, get) => ({
   loading: false,
   error: null,
   filteredProducts: [],
+  getProductById: id => {
+    const {products} = get();
+    const product = products.find(p => p.id === id);
+    return product;
+  },
   getProducts: async () => {
     const state = get();
     try {

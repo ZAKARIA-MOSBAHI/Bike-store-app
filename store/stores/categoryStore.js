@@ -31,4 +31,8 @@ export const useCategoryStore = create(set => ({
       icon: <AccessoryIcon fillColor={colors.gray} />,
     },
   ],
+  chosenCategory: 'All',
+  setChoosenCategory: category => {
+    set(() => ({chosenCategory: category}));
+  },
 }));

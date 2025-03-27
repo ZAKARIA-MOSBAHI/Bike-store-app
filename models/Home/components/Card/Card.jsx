@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useMemo} from 'react';
 import {ImageBackground, View, Text, Image, Pressable} from 'react-native';
 import {styles} from './CardStyle';
 import HeartIcon from '../../../../assets/icons/HeartIcon';
@@ -9,56 +9,46 @@ import {useAppStore} from '../../../../store/store';
 import {useFavoriteStore} from '../../../../store/stores/favoriteStore';
 
 const bg = require('../../../../assets/images/card.png');
-const cardimg = require('../../../../assets/images/bicycle2.png');
-export default function Card({styling, product}) {
+const defaultImg = require('../../../../assets/images/bicycle2.png');
+const Card = ({styling, product}) => {
+  const navigation = useNavigation();
   const {cart, incrementQuantity, decrementQuantity, addToCart} = useAppStore();
   const {addFavorite, favorites, removeFavorite} = useFavoriteStore();
 
-  const [isFavorite, setIsFavorite] = useState(false);
-  const [productQuantity, setProductQuantity] = useState(0);
+  // Derived state using useMemo for better performance
+  const productQuantity = useMemo(
+    () => cart.find(item => item.id === product.id)?.quantity || 0,
+    [cart, product.id],
+  );
+
+  const isFavorite = useMemo(
+    () => favorites.some(fav => fav.id === product.id),
+    [favorites, product.id],
+  );
+
   const handleFavorite = () => {
-    if (isFavorite) {
-      setIsFavorite(false);
-      removeFavorite(product);
-    } else {
-      setIsFavorite(true);
-      addFavorite(product);
-    }
+    isFavorite ? removeFavorite(product.id) : addFavorite(product);
   };
-  const navigation = useNavigation();
-  useEffect(() => {
-    const productInCart = cart.find(item => {
-      if (item.id === product.id) return item;
-    });
-    if (productInCart) {
-      setProductQuantity(productInCart.quantity);
-    } else {
-      setProductQuantity(0);
-    }
-  }, [cart, product]);
-  useEffect(() => {
-    const productIsFavored = favorites.find(item => item.id === product.id);
-    if (productIsFavored) {
-      setIsFavorite(true);
-    }
-  }, [isFavorite, favorites, product]);
+
   return (
     <Pressable
       style={styles.card}
-      onPress={() => {
-        navigation.push('Product', {productId: product.id});
-      }}>
+      onPress={() => navigation.push('Product', {productId: product.id})}>
       <ImageBackground
         source={bg}
         resizeMode="stretch"
         style={[styles.background, styling]}>
         <View style={styles.productImageContainer}>
-          <Image source={cardimg} style={styles.productImage} />
+          <Image
+            source={defaultImg} // Use dynamic image source
+            style={styles.productImage}
+          />
           <Pressable onPress={handleFavorite} style={styles.heartBtn}>
             <HeartIcon isFavorite={isFavorite} />
           </Pressable>
         </View>
-        <View style={[styles.cardinfo]}>
+
+        <View style={styles.cardinfo}>
           <Text style={[styles.category, typography.h4]}>
             {product.category.name}
           </Text>
@@ -67,11 +57,14 @@ export default function Card({styling, product}) {
           </Text>
 
           <View style={styles.quantityCounterContainer}>
-            <Text style={[styles.price, typography.h4]}>$ {product.price}</Text>
+            <Text style={[styles.price, typography.h4]}>
+              ${product.price.toFixed(2)}
+            </Text>
+
             <QuantityCounter
               containerStyle={{borderRadius: 4}}
               plusIconStyle={{width: 14, height: 14}}
-              hide={productQuantity > 0 ? null : true}
+              hide={productQuantity <= 0}
               style={styles.quantityCounter}
               size="sm"
               dark={false}
@@ -80,7 +73,7 @@ export default function Card({styling, product}) {
               onPlusClick={() =>
                 productQuantity > 0
                   ? incrementQuantity(product.id)
-                  : addToCart(product)
+                  : addToCart({...product, quantity: 1})
               }
             />
           </View>
@@ -88,4 +81,6 @@ export default function Card({styling, product}) {
       </ImageBackground>
     </Pressable>
   );
-}
+};
+
+export default React.memo(Card);

@@ -10,13 +10,12 @@ import UploadIcon from '../../../assets/icons/UploadIcon';
 import UploadPictureModal from '../../../components/UploadPictureModal/UploadPictureModal';
 import {openCamera} from '../../../utils/openCamera';
 import {openImageGallery} from '../../../utils/openGallery';
+import {colors} from '../../../styles/colors';
 
 export default function SignupInputs() {
   const {user, users} = useAppStore();
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [uploadStatus, setUploadStatus] = useState(
-    'Upload Your Profile Picture',
-  );
+  const [uploadMessage, setUploadMessage] = useState();
 
   const [showPassword, setShowPassword] = useState({
     password: false,
@@ -24,6 +23,7 @@ export default function SignupInputs() {
   });
   const [formData, setFormData] = useState({
     image: '',
+    name: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -33,7 +33,7 @@ export default function SignupInputs() {
     try {
       const image = await openCamera();
       if (image) {
-        setUploadStatus('Image Uploaded Sucessfully');
+        setUploadMessage('Image Uploaded Sucessfully');
         setFormData(prev => ({...prev, image: image}));
         setIsModalVisible(false);
       }
@@ -45,7 +45,7 @@ export default function SignupInputs() {
     try {
       const image = await openImageGallery();
       if (image) {
-        setUploadStatus('Image Uploaded Sucessfully');
+        setUploadMessage('Image Uploaded Sucessfully');
         setFormData(prev => ({...prev, image: image}));
         setIsModalVisible(false);
       }
@@ -54,7 +54,7 @@ export default function SignupInputs() {
     }
   };
   const handleTrashClick = () => {
-    setUploadStatus('Upload Your Profile Picture');
+    setUploadMessage();
     setFormData(prev => ({...prev, image: null}));
     setIsModalVisible(false);
   };
@@ -70,13 +70,31 @@ export default function SignupInputs() {
   return (
     <>
       <View style={styles.inputsContainer}>
+        {/* IMAGE INPUT */}
         <Pressable
           style={styles.imageInputContainer}
           onPress={() => setIsModalVisible(true)}>
           <UploadIcon width={40} height={40} />
-          <Text style={styles.imageInputText}>{uploadStatus}</Text>
+          <Text
+            style={[
+              styles.imageInputText,
+              uploadMessage ? {color: 'green'} : {color: colors.gray},
+            ]}>
+            {uploadMessage ? uploadMessage : 'Upload Your Profile Picture'}
+          </Text>
         </Pressable>
-
+        {/* NAME INPUT */}
+        <View>
+          <TextInput
+            style={styles.input}
+            placeholder="Name"
+            onChangeText={input =>
+              setFormData(prev => ({...prev, name: input}))
+            }
+          />
+          {errors.name && <Text style={styles.error}>{errors.name}</Text>}
+        </View>
+        {/* EMAIL INPUT */}
         <View>
           <TextInput
             style={styles.input}
@@ -87,6 +105,7 @@ export default function SignupInputs() {
           />
           {errors.email && <Text style={styles.error}>{errors.email}</Text>}
         </View>
+        {/* PASSWORD INPUT */}
         <View>
           <View style={styles.passwordInputContainer}>
             <TextInput
@@ -122,6 +141,7 @@ export default function SignupInputs() {
             <Text style={styles.error}>{errors.password}</Text>
           )}
         </View>
+        {/* CONFIRM PASSWORD INPUT */}
         <View>
           <View style={styles.passwordInputContainer}>
             <TextInput

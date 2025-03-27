@@ -29,6 +29,20 @@ export const typography = {
     lineHeight: scale(25.5),
     letterSpacing: scale(-0.3),
   },
+  h5: {
+    fontFamily: 'Poppins-Medium',
+    fontSize: scale(11),
+
+    lineHeight: scale(25.5),
+    letterSpacing: scale(-0.3),
+  },
+  h6: {
+    fontFamily: 'Poppins-Medium',
+    fontSize: scale(8),
+
+    lineHeight: scale(25.5),
+    letterSpacing: scale(-0.3),
+  },
 
   p: {
     fontFamily: 'Poppins-Medium',

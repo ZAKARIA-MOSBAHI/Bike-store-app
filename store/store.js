@@ -3,13 +3,20 @@ import {create} from 'zustand';
 export const useAppStore = create((set, get) => ({
   users: [
     {
+      name: 'user1',
       image: '',
       email: 'user@example.com',
       password: '123456789',
     },
-    {image: '', email: 'user2@example.com', password: 'password2'},
+    {
+      name: 'user2',
+      image: '',
+      email: 'user2@example.com',
+      password: 'password2',
+    },
   ],
   user: {
+    name: '',
     image: '',
     email: null,
     password: null,
@@ -26,7 +33,6 @@ export const useAppStore = create((set, get) => ({
 
   addToCart: payload =>
     set(state => {
-      console.log('payload price : ', payload.price);
       const isAlreadyInCart = state.cart.find(item => item.id === payload.id);
       if (!isAlreadyInCart) {
         return {

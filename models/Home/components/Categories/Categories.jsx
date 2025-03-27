@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Pressable} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {colors} from '../../../../styles/colors';
@@ -6,9 +6,15 @@ import {styles} from './CategoriesStyle';
 import {scale} from 'react-native-size-matters';
 import {useCategoryStore} from '../../../../store/stores/categoryStore';
 export default function Categories({linear = true, style, filter}) {
-  const {categories} = useCategoryStore();
-  const [chosenCategory, setChosenCategory] = useState('All');
-
+  const {categories, chosenCategory, setChoosenCategory} = useCategoryStore();
+  // state for categories to cause re-render
+  const [categoriesState, setCategoriesState] = useState();
+  useEffect(() => {
+    setCategoriesState(chosenCategory);
+    return () => {
+      setChoosenCategory('All');
+    };
+  }, [categoriesState]);
   return (
     <View style={[styles.container, style]}>
       {categories.map((c, i) => (
@@ -26,7 +32,7 @@ export default function Categories({linear = true, style, filter}) {
               : null
           }
           onPress={() => {
-            setChosenCategory(c.name);
+            setChoosenCategory(c.name);
             filter(c.name);
           }}>
           <LinearGradient

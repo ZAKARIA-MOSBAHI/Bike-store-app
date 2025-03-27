@@ -12,6 +12,7 @@ export const styles = ScaledSheet.create({
     marginInline: '10@s',
   },
   counterBtn: {
+    borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
     mixBlendMode: 'screen',

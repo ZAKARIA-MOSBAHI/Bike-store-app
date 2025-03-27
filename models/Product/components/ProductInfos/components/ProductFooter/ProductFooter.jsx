@@ -15,6 +15,7 @@ export default function ProductFooter({product}) {
   return (
     <View style={styles.footerContainer}>
       <Text style={[typography.h1, {color: '#3D9CEA'}]}>${product.price}</Text>
+
       <TextBtn onPress={handleAddToCart}>
         <Text style={[typography.p, {color: 'white', textAlign: 'center'}]}>
           Add To Cart

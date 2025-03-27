@@ -45,6 +45,14 @@ const useFormValidation = () => {
   // FUNCTION THAT VALIDATE EACH FIELD PASSED BY TYPE
   const validateField = (fieldName, value, isSignup = false) => {
     switch (fieldName) {
+      case 'name':
+        if (!value.trim()) {
+          return 'Name is required';
+        }
+        if (value.trim().length < 4) {
+          return 'Name should be at least 4 characters long';
+        }
+        break;
       case 'email':
         if (!value.trim()) {
           return 'Email is required';
@@ -52,7 +60,7 @@ const useFormValidation = () => {
         if (!EMAIL_REGEX.test(value)) {
           return 'Invalid email format';
         }
-        return '';
+        break;
 
       case 'password': {
         if (!value.trim()) {
@@ -114,6 +122,11 @@ const useFormValidation = () => {
     }
 
     if (isSignup) {
+      const nameError = validateField('name', formData.name, isSignup);
+      if (nameError) {
+        newErrors.name = nameError;
+        isValid = false;
+      }
       const confirmError = validateField(
         'confirmPassword',
         formData.confirmPassword,
@@ -137,6 +150,7 @@ const useFormValidation = () => {
 */
   const handleSubmit = async (formData, isSignup = false) => {
     await resetError();
+
     setErrors({});
 
     if (!validateForm(formData, isSignup)) {
@@ -146,6 +160,7 @@ const useFormValidation = () => {
     if (isSignup) {
       addUser({
         image: formData.image,
+        name: formData.name,
         email: formData.email,
         password: formData.password,
       });
@@ -155,24 +170,24 @@ const useFormValidation = () => {
         password: formData.password,
       });
       return;
-    }
-    console.info('form data ', formData);
-    await getUser(formData);
-
-    // getting the error state here to get the newer version
-    const {error} = useAppStore.getState();
-    if (error) {
-      setErrors(prev => ({...prev, ...error}));
     } else {
-      setErrors({});
-      // resetting the navigation , so that the user start a new navigation when login in
-      // to not let the back handler to go back to the previous page (before he logged in)
-      navigation.reset({
-        index: 0,
-        routes: [{name: 'Home'}],
-      });
+      await getUser(formData);
 
-      // persisting data ...
+      // getting the error state here to get the newer version
+      const {error} = useAppStore.getState();
+      if (error) {
+        setErrors(prev => ({...prev, ...error}));
+      } else {
+        setErrors({});
+        // resetting the navigation , so that the user start a new navigation when login in
+        // to not let the back handler to go back to the previous page (before he logged in)
+        navigation.reset({
+          index: 0,
+          routes: [{name: 'Home'}],
+        });
+
+        // persisting data ...
+      }
     }
   };
 

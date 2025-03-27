@@ -10,6 +10,7 @@ export default function QuantityCounter({
   plusIconStyle,
   minusIconStyle,
   hide,
+  productQuantityStyle,
   quantity,
   onPlusClick,
   onMinusClick,
@@ -21,6 +22,8 @@ export default function QuantityCounter({
     xs: 20,
     sm: 24,
     default: 28,
+    lg: 32,
+    xl: 36,
   };
   return (
     <View
@@ -42,7 +45,9 @@ export default function QuantityCounter({
 
       {hide === true ? null : (
         <>
-          <Text style={[styles.productQuantity]}>{quantity}</Text>
+          <Text style={[styles.productQuantity, productQuantityStyle]}>
+            {quantity}
+          </Text>
           <Button
             style={[
               styles.counterBtn,
