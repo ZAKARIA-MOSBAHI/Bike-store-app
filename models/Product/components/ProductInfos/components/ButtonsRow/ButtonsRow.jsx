@@ -6,17 +6,21 @@ import {styles} from './ButtonsRowStyle';
 const btnNotActiveBg = require('../../../../../../assets/images/btn-not-active.png');
 const btnActiveBg = require('../../../../../../assets/images/btn-active.png');
 
-export default function ButtonsRow({setActiveBtn, setIsOpen, activeBtn}) {
+export default function ButtonsRow({
+  setActiveBtn,
+  animationController,
+  activeBtn,
+}) {
   const buttons = ['Description', 'Specification'];
   return (
     <View style={styles.buttonsRow}>
       {buttons.map((btn, ind) => (
         <Pressable
-          style={[{position: 'relative'}]}
+          style={{position: 'relative'}}
           key={ind}
           onPress={() => {
+            animationController();
             setActiveBtn(btn);
-            setIsOpen(true);
           }}>
           <Image
             source={activeBtn === btn ? btnActiveBg : btnNotActiveBg}

@@ -7,7 +7,9 @@ import {typography} from '../../../../../../styles/typography';
 export default function ProductDesc({product}) {
   return (
     <View style={styles.description}>
-      <Text style={[typography.h2, styles.productTitle]}>{product.name}</Text>
+      <Text style={[typography.h2, styles.productTitle]}>
+        {product.name || 'Product Title'}
+      </Text>
       <Text style={[typography.p, styles.productDescription]}>
         {product.description}
       </Text>

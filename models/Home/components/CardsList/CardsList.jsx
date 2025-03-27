@@ -26,7 +26,7 @@ export default function CardsList() {
 
   // Animation effect
   useEffect(() => {
-    Animated.spring(slideAnim, {
+    Animated.timing(slideAnim, {
       toValue: isCategoriesVisible ? -100 : 0,
       useNativeDriver: true,
       friction: 8,

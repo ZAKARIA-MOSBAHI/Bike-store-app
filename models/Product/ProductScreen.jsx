@@ -12,13 +12,38 @@ export default function ProductScreen() {
   const {products} = useProductStore();
   const [isOpen, setIsOpen] = useState(false);
   const [activeBtn, setActiveBtn] = useState(null);
+  const [infosSectionHeight, setInfosSectionHeight] = useState(0);
   const opacity = useRef(new Animated.Value(0)).current;
   const route = useRoute();
   const routeParams = route.params;
   const product = products.find(p => p.id === routeParams.productId);
-  const {width, height} = Dimensions.get('window');
+  const {width, height} = Dimensions.get('screen');
   const position = useRef(new Animated.Value(-width * 2)).current; // Start from -width (off-screen left)
   const navigation = useNavigation();
+  const slidingAnim = useRef(new Animated.Value(0)).current;
+  const viewRef = useRef(null);
+
+  useEffect(() => {
+    if (viewRef.current) {
+      viewRef.current.measure((x, y, width, measuredHeight) => {
+        setInfosSectionHeight(measuredHeight);
+        slidingAnim.setValue(measuredHeight); // Set initial position to component's height
+      });
+    }
+  }, []);
+
+  const toggleInfosSliding = () => {
+    const peekAmount = infosSectionHeight * 0.25; // Show 25% when closed
+
+    Animated.timing(slidingAnim, {
+      toValue: isOpen ? infosSectionHeight - peekAmount : 0,
+      damping: 10,
+      stiffness: 100,
+      useNativeDriver: true,
+    }).start(() => {
+      setIsOpen(!isOpen);
+    });
+  };
 
   useEffect(() => {
     // Create an animation sequence
@@ -43,6 +68,17 @@ export default function ProductScreen() {
       position.setValue(-width * 2);
     };
   }, [opacity, position, width]);
+  // ANIMATION FOR SLIDING THE PRODUCTS INFO SECTION
+  useEffect(() => {
+    if (infosSectionHeight > 0) {
+      Animated.timing(slidingAnim, {
+        toValue: 0, // Animate to bottom of the screen
+        duration: 500,
+        delay: 3000,
+        useNativeDriver: true,
+      }).start(() => setIsOpen(true));
+    }
+  }, [infosSectionHeight, slidingAnim]);
 
   return (
     <View style={styles.container}>
@@ -50,7 +86,7 @@ export default function ProductScreen() {
         onBtnPress={
           isOpen
             ? () => {
-                setIsOpen(false);
+                toggleInfosSliding();
                 setActiveBtn(null);
               }
             : () => navigation.goBack()
@@ -78,13 +114,16 @@ export default function ProductScreen() {
                 {translateY: -height * 0.2},
                 {scale: isOpen ? 0.5 : 1},
               ],
-              top: isOpen ? '5%' : '50%',
+              top: '5%',
             },
           ]}>
           <ProductImage isOpen={isOpen} product={product} />
         </Animated.View>
 
         <ProductInfos
+          ref={viewRef} // Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?
+          slidingAnim={slidingAnim}
+          animationController={toggleInfosSliding}
           activeBtn={activeBtn}
           setActiveBtn={setActiveBtn}
           setIsOpen={setIsOpen}

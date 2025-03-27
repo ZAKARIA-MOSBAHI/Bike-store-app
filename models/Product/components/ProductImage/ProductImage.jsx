@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image} from 'react-native';
-import {ScaledSheet} from 'react-native-size-matters/extend';
+import {styles} from './ProductImageStyle';
 const productImg = require('../../../../assets/images/bicycle2-lg.png');
 
 export default function ProductImage({product}) {
@@ -12,10 +12,3 @@ export default function ProductImage({product}) {
     />
   );
 }
-
-export const styles = ScaledSheet.create({
-  productImage: {
-    width: '90%',
-    marginInline: 'auto',
-  },
-});

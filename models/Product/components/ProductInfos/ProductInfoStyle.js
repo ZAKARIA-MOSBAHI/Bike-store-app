@@ -1,6 +1,4 @@
-import {Dimensions} from 'react-native';
 import {ScaledSheet} from 'react-native-size-matters/extend';
-const {height} = Dimensions.get('window');
 export const styles = ScaledSheet.create({
   container: {
     width: '100%',
@@ -8,7 +6,9 @@ export const styles = ScaledSheet.create({
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
     position: 'absolute',
-    height: height * 0.65,
+    bottom: 0,
+    right: 0,
+    left: 0,
   },
   containerFooter: {
     flexDirection: 'row',
@@ -25,11 +25,5 @@ export const styles = ScaledSheet.create({
     borderWidth: 2,
     borderColor: '#29212125',
     shadowColor: '#1C222E',
-  },
-  modalOpen: {
-    bottom: 0,
-  },
-  modalClose: {
-    bottom: -380,
   },
 });

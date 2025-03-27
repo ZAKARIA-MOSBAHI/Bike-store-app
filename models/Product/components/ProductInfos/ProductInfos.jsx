@@ -1,29 +1,32 @@
-import React from 'react';
-import {View} from 'react-native';
-
+import React, {forwardRef} from 'react';
+import {Animated} from 'react-native';
 import {styles} from './ProductInfoStyle';
 import ButtonsRow from './components/ButtonsRow/ButtonsRow';
 import ProductDesc from './components/ProductDesc/ProductDesc';
 import ProductFooter from './components/ProductFooter/ProductFooter';
-export default function ProductInfos({
-  isOpen,
-  activeBtn,
-  setActiveBtn,
-  product,
-  setIsOpen,
-}) {
+const ProductInfos = forwardRef((props, ref) => {
+  const {
+    isOpen,
+    animationController,
+    slidingAnim,
+    activeBtn,
+    setActiveBtn,
+    product,
+  } = props;
   return (
-    <View
-      style={[styles.container, isOpen ? styles.modalOpen : styles.modalClose]}>
+    <Animated.View
+      ref={ref}
+      style={[styles.container, {transform: [{translateY: slidingAnim}]}]}>
       <ButtonsRow
         activeBtn={activeBtn}
         setActiveBtn={setActiveBtn}
-        setIsOpen={setIsOpen}
+        animationController={animationController}
         isOpen={isOpen}
       />
       <ProductDesc product={product} />
 
       <ProductFooter product={product} />
-    </View>
+    </Animated.View>
   );
-}
+});
+export default ProductInfos;

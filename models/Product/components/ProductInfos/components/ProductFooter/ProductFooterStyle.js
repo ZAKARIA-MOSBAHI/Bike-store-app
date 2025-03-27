@@ -10,8 +10,8 @@ export const styles = ScaledSheet.create({
     borderTopLeftRadius: 50,
     backgroundColor: '#262E3D',
     width: '100%',
-    paddingBlock: '32@vs',
-    marginBlock: '30@vs',
+    height: '100@vs',
+
     elevation: 100,
     borderWidth: 2,
     borderColor: '#29212125',
